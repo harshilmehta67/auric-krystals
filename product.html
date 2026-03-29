@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#f8f2f6",
+                        "surface-bright": "#fef8fc",
+                        "primary-fixed-dim": "#d2bef0",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#ecdcff",
+                        "on-secondary-container": "#745c00",
+                        "secondary": "#735c00",
+                        "on-surface-variant": "#49454e",
+                        "primary": "#685682",
+                        "on-secondary-fixed": "#241a00",
+                        "surface": "#fef8fc",
+                        "on-surface": "#1d1b1e",
+                        "on-primary-container": "#32224a",
+                        "primary-container": "#9c89b8",
+                        "inverse-primary": "#d2bef0",
+                        "surface-container-high": "#ece6eb",
+                        "tertiary": "#645e49",
+                        "on-primary-fixed": "#23133b",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffe088",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-tint": "#685682",
+                        "background": "#fef8fc",
+                        "surface-container-highest": "#e6e1e5",
+                        "tertiary-container": "#98917a",
+                        "outline": "#7a757e",
+                        "secondary-container": "#fed65b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-variant": "#e6e1e5",
+                        "surface-dim": "#ded8dd",
+                        "surface-container": "#f2ecf0",
+                        "outline-variant": "#cbc4ce",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ebe2c8",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1d1b1e"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <title>Product - Auric Krystals</title>
+</head>
+
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed-dim">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md">
+        <div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+            <div class="flex items-center space-x-3">
+                <img src="assets/logo.jpg" alt="Logo" class="w-8 h-8" />
+                <div class="text-2xl font-serif italic text-purple-900">Auric Krystals</div>
+            </div>
+            <div class="hidden md:flex items-center space-x-12">
+                <a class="text-purple-700/70 hover:text-purple-900 transition-colors text-sm tracking-wide font-body" href="index.html">Home</a>
+                <a class="text-purple-900 border-b-2 border-amber-500 pb-1 text-sm tracking-wide font-body" href="shop.html">Shop</a>
+                <a class="text-purple-700/70 hover:text-purple-900 transition-colors text-sm tracking-wide font-body" href="services.html">Services</a>
+                <a class="text-purple-700/70 hover:text-purple-900 transition-colors text-sm tracking-wide font-body" href="contact.html">Contact</a>
+                <a class="text-purple-700/70 hover:text-purple-900 transition-colors text-sm tracking-wide font-body" href="#" onclick="openQuiz(); return false;">Quiz</a>
+            </div>
+            <button class="text-purple-900 hover:text-amber-600 transition-colors">
+                <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-20">
+        <section class="max-w-screen-2xl mx-auto px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-primary-fixed/30 rounded-xl -rotate-2 -z-10 blur-xl"></div>
+                <img alt="Celestial Amethyst" class="w-full h-full object-cover rounded-xl shadow-2xl" src="https://images.unsplash.com/photo-1599644732595-52ea526ce5f0?w=800&h=800&fit=crop" />
+            </div>
+
+            <div class="space-y-8">
+                <div>
+                    <p class="text-secondary font-label text-sm uppercase tracking-widest mb-3">Premium Specimen</p>
+                    <h1 class="font-headline text-4xl md:text-5xl text-primary mb-4">Celestial Amethyst Light</h1>
+                    <div class="text-amber-500 text-lg font-bold mb-4">★★★★★ (128 reviews)</div>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-4xl font-bold text-primary">€4,200</p>
+                    <p class="text-sm text-on-surface-variant">Free worldwide shipping</p>
+                </div>
+
+                <p class="text-lg leading-relaxed text-on-surface">A genuinely rare and exceptional amethyst cathedral specimen from deep within the Brazilian highlands. This piece embodies tranquility, spiritual awakening, and protective energy. Dimensions: 18cm height × 12cm width. Weight: 2.4kg.</p>
+
+                <div class="flex gap-4">
+                    <button class="flex-1 px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-primary-container transition-all">Buy Now</button>
+                    <button class="flex-1 px-8 py-4 border-2 border-secondary text-secondary rounded-full font-bold hover:bg-secondary-fixed transition-all">Inquire</button>
+                </div>
+
+                <div class="space-y-6 pt-6 border-t border-outline-variant">
+                    <div>
+                        <h3 class="font-bold text-primary mb-3">Metaphysical Properties</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li>🔮 Divine Wisdom - Opens the third eye chakra</li>
+                            <li>✨ Inner Peace - Soothes anxiety and stress</li>
+                            <li>🛡️ Protection - Shields negative energy</li>
+                            <li>🌙 Sleep Enhancement - Promotes restful dreams</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-primary mb-3">Technical Specifications</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>Origin:</strong> Rio Grande do Sul, Brazil</li>
+                            <li><strong>Color:</strong> Deep purple lavender</li>
+                            <li><strong>Mohs Hardness:</strong> 7</li>
+                            <li><strong>Certification:</strong> Includes digital provenance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-screen-2xl mx-auto px-8 lg:px-16 mt-24">
+            <h2 class="font-headline text-3xl text-primary mb-8">Harmonious Pairings</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-surface-container rounded-xl p-6 text-center hover:shadow-lg transition-all">
+                    <p class="text-3xl mb-3">💜</p>
+                    <h3 class="font-bold text-primary mb-2">Clear Quartz</h3>
+                    <p class="text-sm text-on-surface-variant">Amplifies amethyst's spiritual properties</p>
+                </div>
+                <div class="bg-surface-container rounded-xl p-6 text-center hover:shadow-lg transition-all">
+                    <p class="text-3xl mb-3">💗</p>
+                    <h3 class="font-bold text-primary mb-2">Rose Quartz</h3>
+                    <p class="text-sm text-on-surface-variant">Brings compassion and gentleness</p>
+                </div>
+                <div class="bg-surface-container rounded-xl p-6 text-center hover:shadow-lg transition-all">
+                    <p class="text-3xl mb-3">✨</p>
+                    <h3 class="font-bold text-primary mb-2">Selenite</h3>
+                    <p class="text-sm text-on-surface-variant">Enhances clarity and cleansing</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-50 dark:bg-slate-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-12">
+            <div class="mt-16 pt-8 border-t border-stone-200/50">
+                <p class="text-purple-700/60 dark:text-purple-400/50 text-[0.6rem] uppercase tracking-[0.2em]">© 2026 Auric Krystals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>
