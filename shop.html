@@ -4,9 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Shop ethically sourced crystals, bracelets, and specimens at Auric Krystals." />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&amp;display=swap"
+        rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -49,135 +57,124 @@
                         "surface-container-lowest": "#ffffff",
                         "tertiary-fixed": "#ebe2c8",
                         "on-tertiary": "#ffffff",
-                        "on-background": "#1d1b1e"
+                        "on-background": "#1d1b1e",
                     },
                     fontFamily: {
-                        "headline": ["Noto Serif"],
-                        "body": ["Manrope"],
-                        "label": ["Manrope"]
+                        headline: ["Noto Serif", "serif"],
+                        body: ["Manrope", "system-ui", "sans-serif"],
+                        label: ["Manrope", "system-ui", "sans-serif"],
                     },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", "2xl": "1rem", full: "9999px" },
                 },
             },
-        }
+        };
     </script>
     <style>
         .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
         }
     </style>
-    <title>Shop - Auric Krystals</title>
+    <title>Shop — Auric Krystals</title>
 </head>
 
-<body class="bg-background font-body text-on-surface selection:bg-primary-fixed-dim">
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md dark:bg-slate-950/70 shadow-[0_12px_40px_rgba(104,86,130,0.08)]">
-        <div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-            <div class="flex items-center space-x-3">
-                <img src="assets/logo.jpg" alt="Logo" class="w-8 h-8" />
-                <div class="text-2xl font-serif italic text-purple-900">Auric Krystals</div>
+<body class="ak-page bg-background font-body text-on-surface selection:bg-primary-fixed-dim antialiased">
+    <header class="ak-site-header fixed top-0 left-0 right-0 z-50">
+        <div class="ak-site-header__sub">
+            <div
+                class="ak-site-header__inner flex flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4 px-4 sm:px-8 lg:px-10 py-1.5 sm:py-2">
+                <span class="ak-site-header__sub-text truncate text-center sm:text-left max-w-[85vw] sm:max-w-none">Ethically
+                    sourced · Hand-selected specimens</span>
+                <span class="ak-site-header__sub-text hidden sm:inline shrink-0 text-primary/80">Astrology &amp; crystal
+                    guidance</span>
             </div>
-            <div class="hidden md:flex items-center space-x-10">
-                <a class="font-body text-sm tracking-wide text-purple-700/70 hover:text-purple-900 transition-colors" href="index.html">Home</a>
-                <a class="font-body text-sm tracking-wide text-purple-900 border-b-2 border-amber-500 pb-1" href="shop.html">Shop</a>
-                <a class="font-body text-sm tracking-wide text-purple-700/70 hover:text-purple-900 transition-colors" href="services.html">Services</a>
-                <a class="font-body text-sm tracking-wide text-purple-700/70 hover:text-purple-900 transition-colors" href="contact.html">Contact</a>
-                <a class="font-body text-sm tracking-wide text-purple-700/70 hover:text-purple-900 transition-colors" href="#" onclick="openQuiz(); return false;">Quiz</a>
-            </div>
-            <button class="text-purple-900 p-2 hover:text-amber-600 transition-colors">
-                <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-            </button>
         </div>
-    </nav>
+        <nav class="ak-site-header__inner flex justify-between items-center w-full px-4 sm:px-8 lg:px-10 py-2.5 relative">
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 min-w-0 group">
+                <img src="assets/AURIC%20KRYSTALS%20LOGO.png" alt="Auric Krystals"
+                    class="h-8 sm:h-9 w-auto max-w-[10.5rem] object-contain object-left shrink-0" />
+                <span class="hidden sm:inline text-base sm:text-lg font-headline italic text-primary truncate">Auric Krystals</span>
+            </a>
+            <div class="ak-nav-desktop hidden md:flex items-center">
+                <a class="hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-primary border-b-2 border-amber-500 font-medium" href="shop.html">Shop</a>
+                <a class="hover:text-primary transition-colors" href="services.html">Services</a>
+                <a class="hover:text-primary transition-colors" href="contact.html">Contact</a>
+                <a class="text-secondary hover:text-primary transition-colors font-medium" href="#"
+                    onclick="openQuiz(); return false;">Crystal Quiz</a>
+            </div>
+            <div class="flex items-center gap-1">
+                <button type="button"
+                    class="md:hidden p-2.5 rounded-xl text-primary hover:bg-primary-fixed/40 transition-colors"
+                    aria-label="Open menu" data-nav-open>
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+                <a href="shop.html" class="hidden sm:inline-flex p-2.5 rounded-xl text-primary hover:bg-primary-fixed/40"
+                    aria-label="Bag"><span class="material-symbols-outlined">shopping_bag</span></a>
+            </div>
+            <div data-nav-panel class="fixed inset-0 z-[60] hidden md:hidden" aria-hidden="true">
+                <div data-nav-close class="absolute inset-0 bg-black/45 ak-nav-blur"></div>
+                <div
+                    class="ak-site-header__drawer absolute right-0 top-0 h-full w-[min(100%,18rem)] sm:w-80 shadow-2xl flex flex-col p-6 border-l border-outline-variant/25">
+                    <div class="flex justify-between items-center mb-8">
+                        <span class="font-headline text-primary text-lg">Explore</span>
+                        <button type="button" data-nav-close class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container"
+                            aria-label="Close"><span class="material-symbols-outlined">close</span></button>
+                    </div>
+                    <nav class="flex flex-col gap-1">
+                        <a class="py-3 px-4 rounded-xl text-on-surface hover:bg-surface-container" href="index.html">Home</a>
+                        <a class="py-3 px-4 rounded-xl bg-primary-fixed/50 text-primary font-medium" href="shop.html">Shop</a>
+                        <a class="py-3 px-4 rounded-xl text-on-surface hover:bg-surface-container" href="services.html">Services</a>
+                        <a class="py-3 px-4 rounded-xl text-on-surface hover:bg-surface-container" href="contact.html">Contact</a>
+                        <a class="py-3 px-4 rounded-xl text-secondary font-medium hover:bg-secondary-fixed/30"
+                            href="#" onclick="openQuiz(); if (window.akCloseMobileNav) akCloseMobileNav(); return false;">Crystal Quiz</a>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
-        <header class="mb-20">
-            <h1 class="text-5xl md:text-7xl font-headline font-bold text-primary mb-4">Crystal Treasures & Mystical Bracelets</h1>
-            <p class="text-on-surface-variant max-w-2xl">Ethically sourced minerals and healing bracelets hand-selected from the earth's quietest corners.</p>
+    <main class="pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-8 max-w-screen-2xl mx-auto ak-mesh min-h-screen">
+        <header class="mb-10 sm:mb-14 max-w-3xl">
+            <p class="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-3">Collection</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-headline font-semibold text-primary mb-4 leading-tight">Crystal
+                Treasures &amp; Mystical Bracelets</h1>
+            <div class="ak-headline-accent"></div>
+            <p class="text-on-surface-variant mt-6 text-base sm:text-lg leading-relaxed">Ethically sourced minerals and
+                healing bracelets — use the arrows or swipe the row to explore. Each card opens the full product page.</p>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div class="group bg-surface-container rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop" alt="Rose Quartz" class="w-full h-64 object-cover group-hover:scale-105 transition-transform" />
-                <div class="p-6">
-                    <h3 class="font-headline text-lg text-primary mb-2">Rose Quartz Heart</h3>
-                    <p class="text-sm text-on-surface-variant mb-4">Polished heart-shaped rose quartz</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary font-bold">$24.99</span>
-                        <button class="px-4 py-2 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-container transition-all">Add to Bag</button>
+        <div class="relative mb-8" data-ak-carousel data-ak-carousel-kind="products">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button type="button" data-ak-carousel-prev class="ak-carousel__btn" aria-label="Previous products">
+                    <span class="material-symbols-outlined text-2xl">chevron_left</span>
+                </button>
+                <div class="ak-carousel__viewport flex-1 min-w-0 px-0.5">
+                    <div data-ak-carousel-track
+                        class="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scroll-smooth [scrollbar-width:thin]">
                     </div>
                 </div>
+                <button type="button" data-ak-carousel-next class="ak-carousel__btn" aria-label="Next products">
+                    <span class="material-symbols-outlined text-2xl">chevron_right</span>
+                </button>
             </div>
-
-            <div class="group bg-surface-container rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                <img src="https://images.unsplash.com/photo-1599644732595-52ea526ce5f0?w=400&h=400&fit=crop" alt="Amethyst" class="w-full h-64 object-cover group-hover:scale-105 transition-transform" />
-                <div class="p-6">
-                    <h3 class="font-headline text-lg text-primary mb-2">Amethyst Cluster</h3>
-                    <p class="text-sm text-on-surface-variant mb-4">Natural amethyst crystal cluster</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary font-bold">$34.99</span>
-                        <button class="px-4 py-2 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-container transition-all">Add to Bag</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group bg-surface-container rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop" alt="Citrine Bracelet" class="w-full h-64 object-cover group-hover:scale-105 transition-transform" />
-                <div class="p-6">
-                    <h3 class="font-headline text-lg text-primary mb-2">Citrine Bracelet</h3>
-                    <p class="text-sm text-on-surface-variant mb-4">Beaded citrine healing bracelet</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary font-bold">$29.99</span>
-                        <button class="px-4 py-2 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-container transition-all">Add to Bag</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group bg-surface-container rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                <img src="https://images.unsplash.com/photo-1512138010189-873d58c53143?w=400&h=400&fit=crop" alt="Black Tourmaline" class="w-full h-64 object-cover group-hover:scale-105 transition-transform" />
-                <div class="p-6">
-                    <h3 class="font-headline text-lg text-primary mb-2">Black Tourmaline</h3>
-                    <p class="text-sm text-on-surface-variant mb-4">Raw black tourmaline specimens</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary font-bold">$19.99</span>
-                        <button class="px-4 py-2 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-container transition-all">Add to Bag</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group bg-surface-container rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop" alt="Clear Quartz" class="w-full h-64 object-cover group-hover:scale-105 transition-transform" />
-                <div class="p-6">
-                    <h3 class="font-headline text-lg text-primary mb-2">Clear Quartz Point</h3>
-                    <p class="text-sm text-on-surface-variant mb-4">Polished clear quartz point</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary font-bold">$22.99</span>
-                        <button class="px-4 py-2 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-container transition-all">Add to Bag</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group bg-surface-container rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop" alt="Rose Quartz Bracelet" class="w-full h-64 object-cover group-hover:scale-105 transition-transform" />
-                <div class="p-6">
-                    <h3 class="font-headline text-lg text-primary mb-2">Rose Quartz Bracelet</h3>
-                    <p class="text-sm text-on-surface-variant mb-4">Delicate rose quartz beaded bracelet</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary font-bold">$26.99</span>
-                        <button class="px-4 py-2 bg-primary text-white rounded-full text-xs font-bold hover:bg-primary-container transition-all">Add to Bag</button>
-                    </div>
-                </div>
-            </div>
+            <div data-ak-carousel-dots class="flex justify-center gap-2 mt-4 flex-wrap min-h-[0.5rem]"></div>
         </div>
     </main>
 
-    <footer class="bg-stone-50 dark:bg-slate-900 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-12">
-            <div class="mt-16 pt-8 border-t border-stone-200/50 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-purple-700/60 text-[0.6rem] uppercase tracking-[0.2em]">© 2026 Auric Krystals. All rights reserved.</p>
-            </div>
+    <footer class="bg-stone-50 dark:bg-slate-900 border-t border-stone-200/80 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="index.html" class="flex items-center gap-2 opacity-90 hover:opacity-100 transition-opacity">
+                <img src="assets/AURIC%20KRYSTALS%20LOGO.png" alt="" class="h-7 w-auto object-contain" width="100" height="28" />
+                <span class="font-headline italic text-primary text-sm">Auric Krystals</span>
+            </a>
+            <p class="text-on-surface-variant text-[0.6rem] uppercase tracking-[0.2em] text-center sm:text-right">© 2026 Auric Krystals
+            </p>
         </div>
     </footer>
 
+    <script src="js/site-data.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/site.js"></script>
     <script src="js/quiz.js"></script>
 </body>
 

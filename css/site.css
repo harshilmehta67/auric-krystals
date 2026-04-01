@@ -1,0 +1,565 @@
+/* Auric Krystals — shared polish + industry-style shell (inspired by premium SaaS landings) */
+
+:root {
+    --ak-glow: rgba(104, 86, 130, 0.35);
+    --ak-gold-glow: rgba(212, 175, 55, 0.25);
+    --ak-header-bg: rgba(255, 253, 255, 0.78);
+    --ak-header-border: rgba(104, 86, 130, 0.09);
+    --ak-text-muted: rgba(73, 69, 78, 0.92);
+    --ak-grid-line: rgba(104, 86, 130, 0.045);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* —— Page shell: subtle grain + grid (texture without clutter) —— */
+body.ak-page {
+    position: relative;
+    background-color: #faf8fc;
+}
+
+body.ak-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    mix-blend-mode: multiply;
+}
+
+body.ak-page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(var(--ak-grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ak-grid-line) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, black 15%, transparent 72%);
+    opacity: 0.65;
+}
+
+body.ak-page > header,
+body.ak-page > main,
+body.ak-page > footer,
+body.ak-page > script {
+    position: relative;
+    z-index: 1;
+}
+
+/* —— Site header: glass bar + hairline gradient (industry-ready strip) —— */
+.ak-site-header {
+    background: var(--ak-header-bg);
+    backdrop-filter: blur(20px) saturate(1.65);
+    -webkit-backdrop-filter: blur(20px) saturate(1.65);
+    border-bottom: 1px solid var(--ak-header-border);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.92) inset,
+        0 8px 32px rgba(29, 27, 30, 0.045),
+        0 2px 8px rgba(104, 86, 130, 0.04);
+    transition:
+        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+/* After scroll: lift + clarity (works everywhere; pattern from modern sticky nav / micro-interaction UIs) */
+.ak-site-header--scrolled {
+    background: rgba(255, 253, 255, 0.94);
+    border-bottom-color: rgba(104, 86, 130, 0.12);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.98) inset,
+        0 4px 6px -1px rgba(104, 86, 130, 0.06),
+        0 14px 38px rgba(29, 27, 30, 0.07);
+}
+
+.ak-site-header--scrolled .ak-site-header__sub {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(248, 242, 246, 0.55) 100%);
+}
+
+@keyframes ak-header-edge-breathe {
+    0%,
+    100% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .ak-site-header--scrolled::after {
+        animation: ak-header-edge-breathe 4s ease-in-out infinite;
+    }
+}
+
+.ak-site-header .ak-nav-desktop a:focus-visible {
+    outline: 2px solid rgba(104, 86, 130, 0.45);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+.ak-site-header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(236, 220, 255, 0.9) 18%,
+        rgba(212, 175, 55, 0.35) 50%,
+        rgba(236, 220, 255, 0.75) 82%,
+        transparent 100%
+    );
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+.ak-site-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(104, 86, 130, 0.12) 20%,
+        rgba(212, 175, 55, 0.18) 50%,
+        rgba(104, 86, 130, 0.12) 80%,
+        transparent
+    );
+    pointer-events: none;
+}
+
+.ak-site-header__inner {
+    max-width: 96rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Slim top strip (TwoTrim-style trust / positioning row) */
+.ak-site-header__sub {
+    position: relative;
+    overflow: hidden;
+    max-height: 4rem;
+    visibility: visible;
+    transition:
+        max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+    border-bottom: 1px solid rgba(104, 86, 130, 0.07);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(250, 248, 252, 0.4) 100%);
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+}
+
+.ak-site-header__sub::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(104, 86, 130, 0.08) 25%,
+        rgba(212, 175, 55, 0.12) 50%,
+        rgba(104, 86, 130, 0.08) 75%,
+        transparent
+    );
+    pointer-events: none;
+}
+
+.ak-site-header__sub-text {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(73, 69, 78, 0.68);
+    line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+    .ak-site-header__sub-text {
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+    }
+}
+
+/* Desktop nav: compact caps, tight tracking (SaaS-style) */
+.ak-site-header .ak-nav-desktop {
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .ak-site-header .ak-nav-desktop {
+        gap: 2.25rem;
+    }
+}
+
+.ak-site-header .ak-nav-desktop a {
+    position: relative;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ak-text-muted);
+    padding-bottom: 0.35rem;
+    border-bottom: 2px solid transparent;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Gradient underline draw (inactive links — active page keeps gold bar) */
+.ak-site-header .ak-nav-desktop a:not([class*="border-amber"])::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(104, 86, 130, 0.55) 25%,
+        rgba(212, 175, 55, 0.5) 50%,
+        rgba(104, 86, 130, 0.55) 75%,
+        transparent 100%
+    );
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+
+.ak-site-header .ak-nav-desktop a:not([class*="border-amber"]):hover::after,
+.ak-site-header .ak-nav-desktop a:not([class*="border-amber"]):focus-visible::after {
+    transform: scaleX(1);
+}
+
+.ak-site-header .ak-nav-desktop a:hover {
+    color: #685682;
+}
+
+.ak-site-header .ak-nav-desktop a:not([class*="border-amber"]):hover {
+    border-bottom-color: transparent;
+}
+
+/* Active / accent states — Tailwind utilities still set color; reinforce bar */
+.ak-site-header .ak-nav-desktop a.border-amber-500,
+.ak-site-header .ak-nav-desktop a[class*="border-amber"] {
+    color: #685682;
+    border-bottom-color: #d4af37;
+}
+
+.ak-site-header .ak-nav-desktop a.text-secondary,
+.ak-site-header .ak-nav-desktop a[class*="text-secondary"] {
+    color: #735c00;
+}
+
+.ak-site-header .ak-nav-desktop a.text-secondary:hover,
+.ak-site-header .ak-nav-desktop a[class*="text-secondary"]:hover {
+    color: #685682;
+    border-bottom-color: transparent;
+}
+
+/* Brand + toolbar icons: light lift / scale on hover */
+.ak-site-header nav.ak-site-header__inner > a[href="index.html"] {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ak-site-header nav.ak-site-header__inner > a[href="index.html"]:hover {
+    transform: translateY(-2px);
+}
+
+.ak-site-header nav.ak-site-header__inner > div.flex.items-center > button,
+.ak-site-header nav.ak-site-header__inner > div.flex.items-center > a {
+    transition:
+        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.ak-site-header nav.ak-site-header__inner > div.flex.items-center > button:hover,
+.ak-site-header nav.ak-site-header__inner > div.flex.items-center > a:hover {
+    transform: scale(1.07);
+}
+
+.ak-site-header nav.ak-site-header__inner > div.flex.items-center > button:focus-visible,
+.ak-site-header nav.ak-site-header__inner > div.flex.items-center > a:focus-visible {
+    outline: 2px solid rgba(104, 86, 130, 0.45);
+    outline-offset: 3px;
+}
+
+/* Mobile drawer panel */
+.ak-site-header__drawer {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 242, 246, 0.98) 100%);
+    box-shadow:
+        -12px 0 40px rgba(29, 27, 30, 0.08),
+        inset 1px 0 0 rgba(255, 255, 255, 0.9);
+}
+
+.ak-nav-blur {
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+}
+
+/* Quiz / dialog panel — same family as site header */
+.ak-modal-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(248, 242, 246, 0.96) 100%);
+    border: 1px solid rgba(104, 86, 130, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.95) inset,
+        0 24px 56px -12px rgba(29, 27, 30, 0.12),
+        0 8px 24px rgba(104, 86, 130, 0.08);
+}
+
+.ak-modal-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(104, 86, 130, 0.12) 22%,
+        rgba(212, 175, 55, 0.2) 50%,
+        rgba(104, 86, 130, 0.12) 78%,
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* Hero mesh — same palette + optional fine grid */
+.ak-mesh {
+    background-color: #faf8fc;
+    background-image:
+        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(156, 137, 184, 0.2), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 85% 30%, rgba(236, 220, 255, 0.42), transparent 50%),
+        radial-gradient(ellipse 60% 45% at 40% 90%, rgba(254, 214, 91, 0.1), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 95% 85%, rgba(104, 86, 130, 0.07), transparent 50%),
+        linear-gradient(rgba(104, 86, 130, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(104, 86, 130, 0.028) 1px, transparent 1px);
+    background-size:
+        auto,
+        auto,
+        auto,
+        auto,
+        56px 56px,
+        56px 56px;
+}
+
+.ak-card {
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.7) inset,
+        0 12px 40px rgba(104, 86, 130, 0.08),
+        0 4px 12px rgba(29, 27, 30, 0.04);
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease;
+}
+
+.ak-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 24px 48px rgba(104, 86, 130, 0.12),
+        0 8px 20px rgba(29, 27, 30, 0.06);
+}
+
+.ak-btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+.ak-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px var(--ak-glow);
+}
+
+.ak-btn-primary:active {
+    transform: translateY(0);
+}
+
+.ak-glow-ring {
+    box-shadow: 0 0 0 1px rgba(104, 86, 130, 0.12), 0 20px 50px -12px var(--ak-glow);
+}
+
+/* Card carousels (site-data.js + carousel.js) */
+.ak-carousel__viewport {
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, transparent, black 1.5%, black 98.5%, transparent);
+}
+
+.ak-carousel__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    color: #685682;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(104, 86, 130, 0.15);
+    box-shadow: 0 4px 14px rgba(104, 86, 130, 0.1);
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.ak-carousel__btn:hover {
+    background: rgba(236, 220, 255, 0.6);
+    border-color: rgba(104, 86, 130, 0.28);
+    transform: scale(1.05);
+}
+
+.ak-carousel__btn:active {
+    transform: scale(0.98);
+}
+
+.ak-carousel__btn:focus-visible {
+    outline: 2px solid rgba(104, 86, 130, 0.45);
+    outline-offset: 2px;
+}
+
+.ak-carousel__dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    padding: 0;
+    border-radius: 9999px;
+    border: none;
+    background: rgba(104, 86, 130, 0.25);
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.ak-carousel__dot--active {
+    background: #685682;
+    transform: scale(1.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ak-carousel__viewport {
+        mask-image: none;
+    }
+}
+
+/* Section rhythm — optional wrapper for long-form pages */
+.ak-section {
+    position: relative;
+}
+
+.ak-section::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: min(100% - 2rem, 72rem);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(104, 86, 130, 0.08), transparent);
+    pointer-events: none;
+}
+
+/* Decorative headline underline */
+.ak-headline-accent {
+    background: linear-gradient(90deg, rgba(104, 86, 130, 0.85), rgba(212, 175, 55, 0.55));
+    height: 3px;
+    width: 4.5rem;
+    border-radius: 9999px;
+    margin-top: 0.75rem;
+}
+
+@keyframes ak-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ak-animate-in {
+    animation: ak-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ak-shimmer {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+.ak-shimmer-text {
+    background: linear-gradient(
+        90deg,
+        #685682 0%,
+        #9c89b8 25%,
+        #735c00 50%,
+        #9c89b8 75%,
+        #685682 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: ak-shimmer 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.ak-page::before,
+    body.ak-page::after {
+        opacity: 0.2;
+    }
+    .ak-shimmer-text {
+        animation: none;
+        color: #685682;
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+    }
+}

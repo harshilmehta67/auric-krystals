@@ -5,7 +5,7 @@ A beautiful, responsive website for browsing premium crystals, gemstones, healin
 ## 🌟 Features
 
 - **Interactive Crystal Quiz** - 7-question quiz that recommends crystals based on user preferences
-- **Product Gallery** - Browse crystals, bracelets, and gemstones with filters
+- **Product Gallery** - Browse crystals, bracelets, and gemstones (responsive grid with detail pages)
 - **Astrology Services** - Kundali readings, horoscope analysis, compatibility checks, ritual guidance
 - **Contact Page** - Get in touch with social media integration
 - **Responsive Design** - Mobile-first design that works on all devices
@@ -59,16 +59,20 @@ Your site will be live at: `https://YOUR-USERNAME.github.io/auric-krystals`
 
 ```
 /
-├── index.html           # Homepage with quiz modal
-├── shop.html            # Product gallery
-├── product.html         # Product detail template
+├── index.html           # Homepage (quiz auto-opens once until completed)
+├── shop.html            # Product gallery → links to product.html?item=…
+├── product.html         # Product detail (filled via js/product-detail.js)
 ├── services.html        # Astrology services
-├── contact.html         # Contact form
+├── contact.html         # Contact form (mailto handoff via js/site.js)
+├── css/
+│   └── site.css         # Motion, mesh backgrounds, card polish
 ├── js/
-│   └── quiz.js          # 7-question quiz with crystal recommendations
+│   ├── quiz.js          # 7-question quiz; injects modal on any page
+│   ├── site.js          # Mobile nav + contact mailto
+│   └── product-detail.js  # Product copy from ?item= slug
 ├── assets/
-│   └── logo.jpg         # Auric Krystals logo
-└── .gitignore           # Git ignore rules
+│   └── AURIC KRYSTALS LOGO.png   # Place your logo file here (exact name)
+└── .gitignore
 ```
 
 ## 🎨 Design System
