@@ -34,3 +34,6 @@ _reference/
 .agents/
 skills-lock.json
 tsconfig.tsbuildinfo
+
+# NPM auth tokens
+.npmrc

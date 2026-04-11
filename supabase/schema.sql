@@ -29,12 +29,25 @@ CREATE TABLE IF NOT EXISTS admin_settings (
 -- Insert default admin settings
 INSERT INTO admin_settings (id) VALUES (1) ON CONFLICT DO NOTHING;
 
+-- Quiz registrations (users who registered to see quiz results)
+CREATE TABLE IF NOT EXISTS quiz_registrations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  dob DATE NOT NULL,
+  marketing_optin BOOLEAN DEFAULT false,
+  quiz_result TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Storage bucket for payment screenshots (run via Supabase dashboard or API)
 -- CREATE POLICY on storage.objects for public read access
 
 -- Row Level Security
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE quiz_registrations ENABLE ROW LEVEL SECURITY;
 
 -- Allow service role full access (API routes use service role key)
 CREATE POLICY "Service role full access on orders"
@@ -53,6 +66,15 @@ CREATE POLICY "Authenticated users can read orders"
 -- Allow anyone to insert orders (customers placing orders)
 CREATE POLICY "Anyone can insert orders"
   ON orders FOR INSERT
+  WITH CHECK (true);
+
+-- Quiz registrations: service role full access, anyone can insert
+CREATE POLICY "Service role full access on quiz_registrations"
+  ON quiz_registrations FOR ALL
+  USING (auth.role() = 'service_role');
+
+CREATE POLICY "Anyone can insert quiz_registrations"
+  ON quiz_registrations FOR INSERT
   WITH CHECK (true);
 
 -- Updated_at trigger

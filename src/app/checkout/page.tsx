@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, FormEvent, useRef, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent, useRef, ChangeEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
+import QRCode from "qrcode";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -13,11 +14,21 @@ export default function CheckoutPage() {
   const [error, setError] = useState("");
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const upiId = process.env.NEXT_PUBLIC_UPI_ID || "astrokrupa16@oksbi";
   const payeeName = process.env.NEXT_PUBLIC_UPI_PAYEE || "Auric Krystals";
   const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&am=${totalPrice.toFixed(2)}&cu=INR&tn=${encodeURIComponent(`Auric Krystals Order`)}`;
+
+  useEffect(() => {
+    if (totalPrice <= 0) return;
+    QRCode.toDataURL(upiLink, {
+      width: 256,
+      margin: 2,
+      color: { dark: "#1d1b1e", light: "#ffffff" },
+    }).then(setQrDataUrl).catch(() => setQrDataUrl(null));
+  }, [upiLink, totalPrice]);
 
   function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -119,21 +130,35 @@ export default function CheckoutPage() {
           <div className="bg-surface-container-lowest rounded-2xl p-6 ring-1 ring-black/5 space-y-5">
             <h2 className="font-headline text-xl text-primary">Payment via UPI</h2>
             <p className="text-sm text-on-surface-variant">
-              Scan the QR code or tap the button below to pay <strong className="text-primary">${totalPrice.toFixed(2)}</strong> via UPI.
+              Scan the QR code or tap the button below to pay{" "}
+              <strong className="text-primary">{"\u20B9"}{totalPrice.toFixed(2)}</strong> via UPI.
               After payment, upload a screenshot as proof.
             </p>
             <div className="flex flex-col items-center gap-4 py-4">
               <div className="bg-white p-4 rounded-xl shadow-sm ring-1 ring-black/5">
-                <div className="w-48 h-48 bg-surface-container flex items-center justify-center rounded-lg text-on-surface-variant text-sm text-center p-4">
-                  QR code will appear here once UPI ID is configured
-                </div>
+                {qrDataUrl ? (
+                  <img
+                    src={qrDataUrl}
+                    alt={`UPI QR code for \u20B9${totalPrice.toFixed(2)}`}
+                    width={192}
+                    height={192}
+                    className="w-48 h-48 rounded-lg"
+                  />
+                ) : (
+                  <div className="w-48 h-48 bg-surface-container flex items-center justify-center rounded-lg text-on-surface-variant text-sm text-center p-4">
+                    Generating QR...
+                  </div>
+                )}
               </div>
+              <p className="text-xs text-on-surface-variant">
+                UPI ID: <span className="font-mono font-medium text-on-surface">{upiId}</span>
+              </p>
               <a
                 href={upiLink}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full font-bold text-sm hover:bg-green-700 transition-colors"
               >
                 <span className="material-symbols-outlined text-lg">payments</span>
-                Pay ${totalPrice.toFixed(2)} via UPI
+                Pay {"\u20B9"}{totalPrice.toFixed(2)} via UPI
               </a>
             </div>
 
@@ -175,14 +200,14 @@ export default function CheckoutPage() {
                     <p className="text-sm font-medium text-on-surface truncate">{item.title}</p>
                     <p className="text-xs text-on-surface-variant">Qty: {item.quantity}</p>
                   </div>
-                  <p className="text-sm font-bold text-secondary shrink-0">${(item.priceNum * item.quantity).toFixed(2)}</p>
+                  <p className="text-sm font-bold text-secondary shrink-0">{"\u20B9"}{(item.priceNum * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
             </div>
             <div className="pt-4 border-t border-outline-variant/20">
               <div className="flex justify-between items-center text-lg">
                 <span className="font-headline text-primary">Total</span>
-                <span className="font-bold text-primary">${totalPrice.toFixed(2)}</span>
+                <span className="font-bold text-primary">{"\u20B9"}{totalPrice.toFixed(2)}</span>
               </div>
             </div>
 

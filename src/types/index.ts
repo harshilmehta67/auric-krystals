@@ -57,6 +57,17 @@ export interface Order {
   updated_at: string;
 }
 
+export interface QuizRegistration {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  dob: string;
+  marketing_optin: boolean;
+  quiz_result: string | null;
+  created_at: string;
+}
+
 export interface AdminSettings {
   id: number;
   notification_email: string;
