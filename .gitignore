@@ -1,13 +1,36 @@
-# OS files
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Build
+dist/
+
+# Env
+.env
+.env.local
+.env.production.local
+
+# OS
 .DS_Store
 Thumbs.db
 
-# Editor files
+# Editor
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Temporary files
+# Temporary
 *.tmp
-.env.local
+
+# Tasks / local notes
+tasks/
+
+# Reference / AI artifacts
+_reference/
+.agents/
+skills-lock.json
+tsconfig.tsbuildinfo
