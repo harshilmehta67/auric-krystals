@@ -85,31 +85,14 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             </Link>
           </div>
 
-          <div className="space-y-8 pt-8 border-t border-outline-variant/40">
-            <div>
-              <h3 className="font-headline text-lg text-primary mb-3">Metaphysical notes</h3>
-              <ul className="space-y-2 text-sm text-on-surface-variant">
-                <li>· Divine wisdom — supports introspection and rest</li>
-                <li>· Emotional ease — often chosen for bedrooms &amp; meditation</li>
-                <li>· Protective aura — a favorite for sensitive spaces</li>
-              </ul>
-            </div>
-            <div>
+          {product.specifications && (
+            <div className="pt-8 border-t border-outline-variant/40">
               <h3 className="font-headline text-lg text-primary mb-3">Specifications</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <span className="text-on-surface-variant">Origin:</span>{" "}
-                  <span className="text-on-surface">Ethically sourced lots, documented chain</span>
-                </li>
-                <li>
-                  <span className="text-on-surface-variant">Care:</span>{" "}
-                  <span className="text-on-surface">
-                    Dry cloth · avoid prolonged sun on color-sensitive varieties
-                  </span>
-                </li>
-              </ul>
+              <div className="text-sm text-on-surface-variant leading-relaxed whitespace-pre-line">
+                {product.specifications}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     </div>

@@ -22,6 +22,7 @@ export default function ProductForm({ product }: ProductFormProps) {
   const [price, setPrice] = useState(product?.price?.toString() || "");
   const [blurb, setBlurb] = useState(product?.blurb || "");
   const [description, setDescription] = useState(product?.description || "");
+  const [specifications, setSpecifications] = useState(product?.specifications || "");
   const [categoryId, setCategoryId] = useState(product?.category_id || "");
   const [isActive, setIsActive] = useState(product?.is_active ?? true);
   const [sortOrder, setSortOrder] = useState(product?.sort_order?.toString() || "0");
@@ -59,6 +60,7 @@ export default function ProductForm({ product }: ProductFormProps) {
     formData.append("price", price);
     formData.append("blurb", blurb);
     formData.append("description", description);
+    formData.append("specifications", specifications);
     formData.append("category_id", categoryId);
     formData.append("is_active", isActive ? "true" : "false");
     formData.append("sort_order", sortOrder);
@@ -145,6 +147,12 @@ export default function ProductForm({ product }: ProductFormProps) {
         <div>
           <label className="block text-xs font-semibold uppercase tracking-widest text-primary mb-1.5">Full Description</label>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} className={inputClass + " resize-y"} placeholder="Detailed product description..." />
+        </div>
+
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-widest text-primary mb-1.5">Specifications (optional)</label>
+          <textarea value={specifications} onChange={(e) => setSpecifications(e.target.value)} rows={3} className={inputClass + " resize-y"} placeholder="Origin: India&#10;Care: Dry cloth, avoid prolonged sun&#10;Weight: ~50g" />
+          <p className="text-[10px] text-on-surface-variant/60 mt-1">Shown on the product detail page. Leave blank to hide.</p>
         </div>
 
         <label className="flex items-center gap-3 cursor-pointer">

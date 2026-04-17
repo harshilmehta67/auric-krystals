@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS products (
   image_url TEXT NOT NULL DEFAULT '',
   image_url_2 TEXT,
   category_id UUID REFERENCES categories(id) ON DELETE SET NULL,
+  specifications TEXT,
   is_active BOOLEAN NOT NULL DEFAULT true,
   sort_order INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW(),

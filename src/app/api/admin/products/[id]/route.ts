@@ -54,6 +54,9 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
   const priceStr = formData.get("price") as string | null;
   if (priceStr !== null) updates.price = parseFloat(priceStr);
 
+  const specs = formData.get("specifications");
+  if (specs !== null) updates.specifications = (specs as string).trim() || null;
+
   const catId = formData.get("category_id");
   if (catId !== null) updates.category_id = (catId as string) || null;
 

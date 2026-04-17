@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
   const price = parseFloat(formData.get("price") as string || "0");
   const blurb = formData.get("blurb") as string || "";
   const description = formData.get("description") as string || "";
+  const specifications = (formData.get("specifications") as string)?.trim() || null;
   const categoryId = formData.get("category_id") as string || null;
   const isActive = formData.get("is_active") !== "false";
   const sortOrder = parseInt(formData.get("sort_order") as string || "0");
@@ -95,6 +96,7 @@ export async function POST(request: NextRequest) {
       price,
       blurb: blurb.trim(),
       description: description.trim(),
+      specifications,
       image_url: imageUrl,
       image_url_2: imageUrl2,
       category_id: categoryId || null,

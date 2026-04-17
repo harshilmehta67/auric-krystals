@@ -18,6 +18,7 @@ export interface Product {
   description: string;
   image_url: string;
   image_url_2: string | null;
+  specifications: string | null;
   category_id: string | null;
   category_name?: string;
   is_active: boolean;
