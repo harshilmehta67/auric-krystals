@@ -68,7 +68,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                   <h3 className="font-headline text-sm text-primary truncate">
                     {item.title}
                   </h3>
-                  <p className="text-secondary font-bold text-sm">{item.price}</p>
+                  <p className="text-secondary font-bold text-sm">{"\u20B9"}{item.price.toFixed(2)}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <button
                       onClick={() => updateQuantity(item.slug, item.quantity - 1)}
@@ -106,7 +106,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             <div className="flex justify-between items-center">
               <span className="font-headline text-primary">Total</span>
               <span className="text-xl font-bold text-primary">
-                ${totalPrice.toFixed(2)}
+                {"\u20B9"}{totalPrice.toFixed(2)}
               </span>
             </div>
             <Link

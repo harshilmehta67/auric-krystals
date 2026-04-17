@@ -56,7 +56,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
       setLastAdded({
         title: product.title,
-        img: product.img,
+        img: product.image_url,
         quantity: newQty,
       });
 
@@ -71,8 +71,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           slug: product.slug,
           title: product.title,
           price: product.price,
-          priceNum: product.priceNum,
-          img: product.img,
+          img: product.image_url,
           quantity: 1,
         },
       ];
@@ -97,7 +96,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const clearLastAdded = useCallback(() => setLastAdded(null), []);
 
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
-  const totalPrice = items.reduce((sum, i) => sum + i.priceNum * i.quantity, 0);
+  const totalPrice = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   return (
     <CartContext.Provider

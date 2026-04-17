@@ -1,12 +1,29 @@
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Product {
+  id: string;
   slug: string;
   title: string;
   subtitle: string;
-  price: string; // e.g. "$24.99" - display string
-  priceNum: number; // numeric for calculations (e.g. 24.99)
+  price: number;
   blurb: string;
-  img: string;
-  desc: string;
+  description: string;
+  image_url: string;
+  image_url_2: string | null;
+  category_id: string | null;
+  category_name?: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Offering {
@@ -27,8 +44,7 @@ export interface SocialLink {
 export interface CartItem {
   slug: string;
   title: string;
-  price: string;
-  priceNum: number;
+  price: number;
   img: string;
   quantity: number;
 }

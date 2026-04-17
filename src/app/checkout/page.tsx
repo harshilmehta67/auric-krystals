@@ -200,7 +200,7 @@ export default function CheckoutPage() {
                     <p className="text-sm font-medium text-on-surface truncate">{item.title}</p>
                     <p className="text-xs text-on-surface-variant">Qty: {item.quantity}</p>
                   </div>
-                  <p className="text-sm font-bold text-secondary shrink-0">{"\u20B9"}{(item.priceNum * item.quantity).toFixed(2)}</p>
+                  <p className="text-sm font-bold text-secondary shrink-0">{"\u20B9"}{(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
             </div>

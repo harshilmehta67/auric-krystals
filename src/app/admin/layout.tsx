@@ -55,6 +55,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: "/admin", label: "Orders", icon: "receipt_long" },
+    { href: "/admin/products", label: "Products", icon: "inventory_2" },
+    { href: "/admin/categories", label: "Categories", icon: "category" },
     { href: "/admin/settings", label: "Settings", icon: "settings" },
   ];
 
@@ -94,7 +96,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   key={item.href}
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                    pathname === item.href
+                    (item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href))
                       ? "bg-primary-fixed/50 text-primary"
                       : "text-on-surface-variant hover:bg-surface-container"
                   }`}

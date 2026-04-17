@@ -32,14 +32,14 @@ export default function CartPage() {
                 <Image src={item.img} alt={item.title} width={120} height={120} className="w-24 h-24 sm:w-32 sm:h-32 rounded-xl object-cover shrink-0" />
                 <div className="flex-1 min-w-0">
                   <Link href={`/product/${item.slug}`} className="font-headline text-lg text-primary hover:text-secondary transition-colors">{item.title}</Link>
-                  <p className="text-secondary font-bold text-lg mt-1">{item.price}</p>
+                  <p className="text-secondary font-bold text-lg mt-1">{"\u20B9"}{item.price.toFixed(2)}</p>
                   <div className="flex items-center gap-3 mt-3">
                     <button onClick={() => updateQuantity(item.slug, item.quantity - 1)}
                       className="w-8 h-8 rounded-full border border-outline-variant/40 flex items-center justify-center hover:bg-surface-container transition-colors font-bold">−</button>
                     <span className="font-medium w-8 text-center">{item.quantity}</span>
                     <button onClick={() => updateQuantity(item.slug, item.quantity + 1)}
                       className="w-8 h-8 rounded-full border border-outline-variant/40 flex items-center justify-center hover:bg-surface-container transition-colors font-bold">+</button>
-                    <span className="text-sm text-on-surface-variant ml-2">= ${(item.priceNum * item.quantity).toFixed(2)}</span>
+                    <span className="text-sm text-on-surface-variant ml-2">= {"\u20B9"}{(item.price * item.quantity).toFixed(2)}</span>
                     <button onClick={() => removeItem(item.slug)} className="ml-auto text-on-surface-variant hover:text-red-500 transition-colors" aria-label="Remove item">
                       <span className="material-symbols-outlined">delete</span>
                     </button>
@@ -52,7 +52,7 @@ export default function CartPage() {
           <div className="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 ring-1 ring-black/5 space-y-4">
             <div className="flex justify-between items-center text-lg">
               <span className="font-headline text-primary">Subtotal</span>
-              <span className="font-bold text-primary">${totalPrice.toFixed(2)}</span>
+              <span className="font-bold text-primary">{"\u20B9"}{totalPrice.toFixed(2)}</span>
             </div>
             <p className="text-sm text-on-surface-variant">Shipping calculated at checkout</p>
             <Link href="/checkout" className="block w-full py-4 ak-btn-primary bg-primary text-on-primary rounded-xl font-bold text-center text-lg">

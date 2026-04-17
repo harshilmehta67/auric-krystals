@@ -32,7 +32,7 @@ export default function ProductCard({ product, variant = "carousel" }: ProductCa
     <div className={`${cardClass} transition-shadow duration-300 ${justAdded ? "ring-2 ring-green-400/60 shadow-lg shadow-green-200/30" : ""}`}>
       <Link href={`/product/${product.slug}`} className="overflow-hidden aspect-[4/3]">
         <Image
-          src={product.img}
+          src={product.image_url}
           alt={product.title}
           width={400}
           height={300}
@@ -46,7 +46,7 @@ export default function ProductCard({ product, variant = "carousel" }: ProductCa
         </Link>
         <p className="text-sm text-on-surface-variant mb-4 flex-1">{product.blurb}</p>
         <div className="flex justify-between items-center gap-3">
-          <span className="text-secondary font-bold">{product.price}</span>
+          <span className="text-secondary font-bold">{"\u20B9"}{product.price.toFixed(2)}</span>
           <div className="flex gap-2">
             <Link
               href={`/product/${product.slug}`}
