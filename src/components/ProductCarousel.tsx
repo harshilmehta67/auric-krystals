@@ -8,17 +8,23 @@ import { Product } from "@/types";
 export default function ProductCarousel() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function load() {
       try {
         const res = await fetch("/api/products");
-        if (res.ok) {
-          const data = await res.json();
-          setProducts(data.products || []);
-        }
-      } catch {
-        /* graceful */
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setProducts(
+          (data.products || []).map((p: Product) => ({
+            ...p,
+            price: Number(p.price) || 0,
+          }))
+        );
+      } catch (err) {
+        console.error("ProductCarousel fetch error:", err);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -36,7 +42,7 @@ export default function ProductCarousel() {
     );
   }
 
-  if (products.length === 0) return null;
+  if (error || products.length === 0) return null;
 
   return (
     <Carousel>

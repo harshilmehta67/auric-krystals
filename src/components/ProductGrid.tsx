@@ -18,13 +18,17 @@ export default function ProductGrid({ categoryFilter }: ProductGridProps) {
     async function load() {
       try {
         const res = await fetch("/api/products");
-        if (res.ok) {
-          const data = await res.json();
-          setProducts(data.products || []);
-          setCategories(data.categories || []);
-        }
-      } catch {
-        /* graceful fallback */
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setProducts(
+          (data.products || []).map((p: Product) => ({
+            ...p,
+            price: Number(p.price) || 0,
+          }))
+        );
+        setCategories(data.categories || []);
+      } catch (err) {
+        console.error("ProductGrid fetch error:", err);
       } finally {
         setLoading(false);
       }

@@ -46,7 +46,7 @@ export default function ProductCard({ product, variant = "carousel" }: ProductCa
         </Link>
         <p className="text-sm text-on-surface-variant mb-4 flex-1">{product.blurb}</p>
         <div className="flex justify-between items-center gap-3">
-          <span className="text-secondary font-bold">{"\u20B9"}{product.price.toFixed(2)}</span>
+          <span className="text-secondary font-bold">{"\u20B9"}{Number(product.price).toFixed(2)}</span>
           <div className="flex gap-2">
             <Link
               href={`/product/${product.slug}`}
