@@ -225,9 +225,10 @@ export default function QuizModal({ open, onClose }: QuizModalProps) {
     "w-full px-4 py-3 bg-surface-container-low rounded-xl border border-outline-variant/25 focus:border-primary focus:ring-2 focus:ring-primary/15 outline-none transition-all text-on-surface placeholder:text-on-surface-variant/50 text-sm";
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/45 ak-nav-blur px-4">
-      <div className="ak-modal-card max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6 sm:p-8">
+    <div className="fixed inset-0 z-[70] bg-black/45 ak-nav-blur overflow-y-auto overscroll-contain">
+      <div className="min-h-full flex items-center justify-center px-4 py-8">
+        <div className="ak-modal-card max-w-2xl w-full">
+          <div className="p-6 sm:p-8 max-h-[85vh] overflow-y-auto">
           {/* Phase: Questions */}
           {phase === "questions" && (
             <div className="space-y-6">
@@ -418,6 +419,7 @@ export default function QuizModal({ open, onClose }: QuizModalProps) {
               </button>
             </div>
           )}
+          </div>
         </div>
       </div>
     </div>

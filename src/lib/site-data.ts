@@ -37,20 +37,16 @@ export const social: SocialLink[] = [
 export const offerings: Offering[] = [
   {
     title: "Kundali readings",
-    blurb: "Vedic birth chart insight for life path, timing, and relationships.",
+    blurb:
+      "A personalized Vedic birth-chart analysis — decoding planetary placements across the twelve houses to reveal life purpose, timing, and karmic patterns.",
     href: "/services",
-    img: "https://images.unsplash.com/photo-1618644952181-db8e1bcb2c04?w=600&h=600&fit=crop",
+    img: "https://images.unsplash.com/photo-1618644952181-db8e1bcb2c04?w=800&h=800&fit=crop",
   },
   {
-    title: "Horoscope & transits",
-    blurb: "Monthly and yearly forecasts aligned with planetary movement.",
+    title: "Janmakshar readings",
+    blurb:
+      "Discover your true birth-letter and ruling nakshatra from the Moon's position at birth — guiding name selection, remedies, and rituals aligned with your lunar blueprint.",
     href: "/services",
-    img: "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=600&h=600&fit=crop",
-  },
-  {
-    title: "Crystal guidance",
-    blurb: "Pair the right stones with your chart and intentions.",
-    href: "/contact",
-    img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop",
+    img: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=800&fit=crop",
   },
 ];

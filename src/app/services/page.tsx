@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Services — Auric Krystals",
-  description: "Kundali readings, horoscopes, and spiritual wellness — Auric Krystals.",
+  description: "Vedic Kundali readings and Janmakshar nakshatra guidance — Auric Krystals.",
 };
 
 export default function ServicesPage() {
@@ -23,63 +24,59 @@ export default function ServicesPage() {
       <section className="py-16 sm:py-24 bg-surface-bright border-y border-outline-variant/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-8">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-            <div className="bg-surface-container-lowest rounded-2xl p-8 sm:p-10 ak-card ring-1 ring-black/5 space-y-6">
-              <h2 className="font-headline text-2xl sm:text-3xl text-primary">Kundali readings</h2>
-              <p className="text-on-surface-variant leading-relaxed">
-                Vedic birth chart work to clarify purpose, timing, and recurring themes in your life path.
-              </p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Personality &amp; life path</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Compatibility analysis</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Career &amp; finance insights</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Health &amp; vitality timing</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Karmic patterns</li>
-              </ul>
-              <Link href="/contact" className="inline-flex ak-btn-primary px-8 py-3.5 bg-primary text-on-primary rounded-full font-bold">
-                Book a reading
-              </Link>
+            <div className="bg-surface-container-lowest rounded-2xl overflow-hidden ak-card ring-1 ring-black/5 flex flex-col">
+              <div className="relative aspect-[16/10] bg-surface-container">
+                <Image
+                  src="https://images.unsplash.com/photo-1618644952181-db8e1bcb2c04?w=1200&h=750&fit=crop"
+                  alt="Zodiac wheel — Vedic Kundali"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-8 sm:p-10 space-y-5 flex-1 flex flex-col">
+                <h2 className="font-headline text-2xl sm:text-3xl text-primary">Kundali readings</h2>
+                <p className="text-on-surface-variant leading-relaxed">
+                  Your Kundali is a cosmic blueprint cast from the exact moment and place of your birth. A Vedic birth-chart reading decodes the placement of planets across the twelve houses and zodiac signs — revealing life purpose, relationship dynamics, career timing, health patterns, and karmic lessons through classical Jyotish principles.
+                </p>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Personality &amp; life-path analysis</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Relationships &amp; compatibility (Guna Milan)</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Career, finance &amp; growth timing</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Dasha &amp; transit-based predictions</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Doshas, remedies &amp; karmic patterns</li>
+                </ul>
+                <Link href="/contact" className="inline-flex ak-btn-primary px-8 py-3.5 bg-primary text-on-primary rounded-full font-bold self-start">
+                  Book a reading
+                </Link>
+              </div>
             </div>
-            <div className="bg-surface-container-lowest rounded-2xl p-8 sm:p-10 ak-card ring-1 ring-black/5 space-y-6">
-              <h2 className="font-headline text-2xl sm:text-3xl text-primary">Horoscope analysis</h2>
-              <p className="text-on-surface-variant leading-relaxed">
-                Month-by-month and yearly forecasts anchored in transits, retrogrades, and lunar rhythm.
-              </p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Monthly forecasts</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Yearly predictions</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Retrograde insights</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Lunar phase guidance</li>
-                <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Ritual recommendations</li>
-              </ul>
-              <Link href="/contact" className="inline-flex ak-btn-primary px-8 py-3.5 bg-primary text-on-primary rounded-full font-bold">
-                Request analysis
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
-          <h2 className="font-headline text-2xl sm:text-3xl text-primary text-center mb-12">Additional services</h2>
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-            <div className="bg-surface-container-lowest rounded-2xl p-8 ak-card ring-1 ring-black/5">
-              <h3 className="font-headline text-xl text-primary mb-3">Compatibility check</h3>
-              <p className="text-on-surface-variant mb-6 text-sm sm:text-base leading-relaxed">
-                Synastry-focused sessions for couples or partnerships seeking grounded insight.
-              </p>
-              <Link href="/contact" className="inline-flex px-6 py-2.5 border-2 border-primary text-primary rounded-full font-bold text-sm hover:bg-primary-fixed/40 transition-colors">
-                Learn more
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest rounded-2xl p-8 ak-card ring-1 ring-black/5">
-              <h3 className="font-headline text-xl text-primary mb-3">Ritual guidance</h3>
-              <p className="text-on-surface-variant mb-6 text-sm sm:text-base leading-relaxed">
-                Lunar-aligned practices and simple rituals to support your current season.
-              </p>
-              <Link href="/contact" className="inline-flex px-6 py-2.5 border-2 border-primary text-primary rounded-full font-bold text-sm hover:bg-primary-fixed/40 transition-colors">
-                Discover
-              </Link>
+            <div className="bg-surface-container-lowest rounded-2xl overflow-hidden ak-card ring-1 ring-black/5 flex flex-col">
+              <div className="relative aspect-[16/10] bg-surface-container">
+                <Image
+                  src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200&h=750&fit=crop"
+                  alt="Starlit sky — nakshatra and Janmakshar"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-8 sm:p-10 space-y-5 flex-1 flex flex-col">
+                <h2 className="font-headline text-2xl sm:text-3xl text-primary">Janmakshar readings</h2>
+                <p className="text-on-surface-variant leading-relaxed">
+                  Janmakshar is the auspicious birth-letter derived from the Moon&apos;s nakshatra and pada at the time of birth — the foundation for your true Vedic name and lunar identity. A Janmakshar reading reveals your ruling nakshatra, its presiding deity, innate traits, and guides name selection, rashi-aligned remedies, and rituals in harmony with your cosmic signature.
+                </p>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Nakshatra &amp; pada identification</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Authentic Janmakshar &amp; name suggestions</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Rashi &amp; presiding-deity insights</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Nakshatra strengths &amp; doshas</li>
+                  <li className="flex gap-3"><span className="text-secondary font-bold">✓</span> Remedies, mantras &amp; ritual alignment</li>
+                </ul>
+                <Link href="/contact" className="inline-flex ak-btn-primary px-8 py-3.5 bg-primary text-on-primary rounded-full font-bold self-start">
+                  Request reading
+                </Link>
+              </div>
             </div>
           </div>
         </div>
