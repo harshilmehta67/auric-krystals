@@ -3,6 +3,7 @@
 import { useEffect, useState, createContext, useContext, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { getSupabaseBrowser } from "@/lib/supabase";
 
 interface AdminContextType {
   token: string;
@@ -24,17 +25,43 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("ak_admin_token");
-    if (stored) {
-      setToken(stored);
-    } else if (pathname !== "/admin/login") {
-      router.replace("/admin/login");
+    // One-time cleanup of the legacy raw-token key (pre auto-refresh era).
+    if (localStorage.getItem("ak_admin_token")) {
+      localStorage.removeItem("ak_admin_token");
     }
-    setLoading(false);
+
+    const supabase = getSupabaseBrowser();
+    let mounted = true;
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!mounted) return;
+      const t = session?.access_token ?? null;
+      setToken(t);
+      setLoading(false);
+      if (!t && pathname !== "/admin/login") {
+        router.replace("/admin/login");
+      }
+    });
+
+    // Keep the token in sync as Supabase auto-refreshes it.
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      const t = session?.access_token ?? null;
+      setToken(t);
+      if (!t && pathname !== "/admin/login") {
+        router.replace("/admin/login");
+      }
+    });
+
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
   }, [pathname, router]);
 
-  const logout = useCallback(() => {
-    localStorage.removeItem("ak_admin_token");
+  const logout = useCallback(async () => {
+    const supabase = getSupabaseBrowser();
+    await supabase.auth.signOut();
     setToken(null);
     router.replace("/admin/login");
   }, [router]);

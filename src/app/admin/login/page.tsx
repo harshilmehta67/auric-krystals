@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { getSupabaseBrowser } from "@/lib/supabase";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -16,16 +17,19 @@ export default function AdminLoginPage() {
     setError("");
 
     try {
-      const res = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      // Clear any stale legacy token from the older manual-storage flow.
+      localStorage.removeItem("ak_admin_token");
+
+      const supabase = getSupabaseBrowser();
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Login failed");
+      if (authError || !data.session) {
+        throw new Error(authError?.message || "Invalid credentials");
+      }
 
-      localStorage.setItem("ak_admin_token", data.token);
       router.replace("/admin");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed");

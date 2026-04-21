@@ -101,7 +101,7 @@ All tables have Row Level Security (RLS) enabled. Service role has full access; 
 | `/api/products` | GET | Public product list with category filter (`?category=slug`) |
 | `/api/orders` | POST | Create order + upload payment screenshot |
 | `/api/quiz-register` | POST | Submit quiz registration (name, DOB, email, phone) |
-| `/api/admin/login` | POST | Admin authentication |
+| *(admin auth)* | — | Handled directly via Supabase Auth (`signInWithPassword`) in the browser with session persistence and auto-refresh |
 | `/api/admin/orders` | GET | List orders (paginated, filterable by status) |
 | `/api/admin/orders/[id]` | GET/PATCH | Get or update order status |
 | `/api/admin/products` | GET/POST | List or create products (with image upload) |
