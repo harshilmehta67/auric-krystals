@@ -196,7 +196,7 @@ export default function HomePage() {
               <Image
                 alt="Astrology services"
                 className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-700"
-                src="https://images.unsplash.com/photo-1618644952181-db8e1bcb2c04?w=500&h=500&fit=crop"
+                src="/assets/kundali-zodiac.jpg"
                 width={500}
                 height={500}
                 loading="lazy"
