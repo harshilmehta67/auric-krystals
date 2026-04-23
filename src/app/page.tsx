@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCarousel from "@/components/ProductCarousel";
 import OfferingCarousel from "@/components/OfferingCarousel";
+import CategoryAttractions from "@/components/CategoryAttractions";
 import QuizAutoStart from "@/components/QuizAutoStart";
 import FindYourCrystalButton from "@/components/FindYourCrystalButton";
 
@@ -136,77 +137,7 @@ export default function HomePage() {
               Shop All
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <Link
-              href="/shop"
-              className="sm:col-span-2 group relative rounded-2xl overflow-hidden bg-surface-container min-h-[14rem] sm:min-h-[16rem] ak-card ring-1 ring-black/5"
-            >
-              <Image
-                alt="Premium crystals"
-                className="w-full h-full object-cover min-h-[14rem] sm:min-h-[16rem] group-hover:scale-[1.03] transition-transform duration-700"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwoX4tdXZ6eOQ_3-Y4odnBlPrtZ7WfFOHUxbqisdpPbC6_SkvJUgg-o8SLaLT2rLoeh7DJ8rC28VVpU9dPmxwA_j6vN5tzreAEtw6gijJC8U5akazNSkKQ48EoqhKi05CIqnM8Iz8pPPzb5OiDx9LU3RLyKegITv-DCDXDMe7brZZoXJYK7JBh0ItvUFXrlxBSwfxgJb_fPjCRj4kTtgklxkxDrs2331jjrjxAWkCrHqBIU6bEhbHcIVbeFcMxsKjJ-2mrOv9UcpDe"
-                width={800}
-                height={400}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7">
-                <h3 className="font-headline text-xl sm:text-2xl text-white mb-1">Premium Crystals</h3>
-                <p className="text-white/85 text-xs sm:text-sm">Ethically sourced specimens</p>
-              </div>
-            </Link>
-            <Link
-              href="/shop"
-              className="group relative rounded-2xl overflow-hidden bg-surface-container min-h-[14rem] ak-card ring-1 ring-black/5"
-            >
-              <Image
-                alt="Bracelets"
-                className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-700"
-                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop"
-                width={500}
-                height={500}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/85 to-transparent" />
-              <div className="absolute bottom-5 left-5">
-                <h3 className="font-headline text-lg text-white">Bracelets</h3>
-              </div>
-            </Link>
-            <Link
-              href="/shop"
-              className="group relative rounded-2xl overflow-hidden bg-surface-container min-h-[14rem] ak-card ring-1 ring-black/5"
-            >
-              <Image
-                alt="Gemstones"
-                className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-700"
-                src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&h=500&fit=crop"
-                width={500}
-                height={500}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/85 to-transparent" />
-              <div className="absolute bottom-5 left-5">
-                <h3 className="font-headline text-lg text-white">Gemstones</h3>
-              </div>
-            </Link>
-            <Link
-              href="/services"
-              className="group relative rounded-2xl overflow-hidden bg-surface-container min-h-[14rem] ak-card ring-1 ring-black/5 sm:col-span-2 lg:col-span-1"
-            >
-              <Image
-                alt="Astrology services"
-                className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-700"
-                src="/assets/kundali-zodiac.jpg"
-                width={500}
-                height={500}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/85 to-transparent" />
-              <div className="absolute bottom-5 left-5">
-                <h3 className="font-headline text-lg text-white">Services</h3>
-              </div>
-            </Link>
-          </div>
+          <CategoryAttractions />
         </div>
       </section>
 
