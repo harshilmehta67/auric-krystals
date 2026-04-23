@@ -14,17 +14,37 @@ export default function OfferingCarousel() {
         href={o.href}
         className="group block bg-surface-container-lowest rounded-3xl overflow-hidden ak-card ring-1 ring-black/5 hover:ring-primary/30 transition-all"
       >
-        <div className="grid md:grid-cols-2 gap-0">
-          <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[22rem] bg-surface-container">
-            <Image
-              src={o.img}
-              alt={o.title}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
-              priority={false}
-            />
+        <div className="grid md:grid-cols-[1.15fr_1fr]">
+          {/* Visual panel: portrait + companion image */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 bg-surface-container">
+            <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[22rem] md:min-h-[26rem] overflow-hidden">
+              <Image
+                src={o.img}
+                alt={o.title}
+                fill
+                sizes="(min-width: 1024px) 28vw, (min-width: 640px) 30vw, 100vw"
+                className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
+              />
+            </div>
+            {o.img2 && (
+              <div className="relative hidden sm:block sm:min-h-[22rem] md:min-h-[26rem] overflow-hidden border-l border-white/40">
+                <Image
+                  src={o.img2}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 28vw, 30vw"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                />
+                {/* Soft gradient overlay to tie into the card palette */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10 mix-blend-soft-light"
+                />
+              </div>
+            )}
           </div>
+
+          {/* Text panel */}
           <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
             <p className="text-secondary text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-3">
               Featured service

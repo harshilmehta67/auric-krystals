@@ -32,6 +32,7 @@ export interface Offering {
   blurb: string;
   href: string;
   img: string;
+  img2?: string;
 }
 
 export interface SocialLink {

@@ -41,5 +41,6 @@ export const offerings: Offering[] = [
       "A personalized Vedic birth-chart analysis — decoding planetary placements across the twelve houses to reveal life purpose, timing, and karmic patterns.",
     href: "/services",
     img: "/assets/kundali-reading.jpg",
+    img2: "/assets/kundali-zodiac.jpg",
   },
 ];
