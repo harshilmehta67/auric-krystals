@@ -1,97 +1,93 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { offerings } from "@/lib/site-data";
-import Carousel from "./Carousel";
+import { getServiceClient } from "@/lib/admin-auth";
+import { SERVICES_DEFAULTS } from "@/lib/services-defaults";
+import type { AboutSettings, ServicesSettings } from "@/types";
 
-export default function OfferingCarousel() {
-  // Single-offering spotlight — a polished feature card instead of a one-item carousel.
-  if (offerings.length === 1) {
-    const o = offerings[0];
-    return (
-      <Link
-        href={o.href}
-        className="group block bg-surface-container-lowest rounded-3xl overflow-hidden ak-card ring-1 ring-black/5 hover:ring-primary/30 transition-all"
-      >
-        <div className="grid md:grid-cols-[1.15fr_1fr]">
-          {/* Visual panel: portrait + companion image */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 bg-surface-container">
-            <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[22rem] md:min-h-[26rem] overflow-hidden">
-              <Image
-                src={o.img}
-                alt={o.title}
-                fill
-                sizes="(min-width: 1024px) 28vw, (min-width: 640px) 30vw, 100vw"
-                className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
-              />
-            </div>
-            {o.img2 && (
-              <div className="relative hidden sm:block sm:min-h-[22rem] md:min-h-[26rem] overflow-hidden border-l border-white/40">
-                <Image
-                  src={o.img2}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 28vw, 30vw"
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
-                />
-                {/* Soft gradient overlay to tie into the card palette */}
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10 mix-blend-soft-light"
-                />
-              </div>
-            )}
-          </div>
+// The "Cosmic offerings" spotlight on the home page is now driven by the
+// same admin-editable settings that power /services and /admin/about. The
+// left portrait comes from About settings (Krupali's photo), the right
+// companion image comes from Services settings (the cosmic hero), and all
+// copy comes from Services settings — so updating either admin page
+// automatically refreshes this strip.
 
-          {/* Text panel */}
-          <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
-            <p className="text-secondary text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-3">
-              Featured service
-            </p>
-            <h3 className="font-headline text-2xl sm:text-3xl text-primary mb-4 italic">
-              {o.title}
-            </h3>
-            <p className="text-on-surface-variant leading-relaxed mb-6 text-sm sm:text-base">
-              {o.blurb}
-            </p>
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all">
-              Explore sittings
-              <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
-            </span>
-          </div>
-        </div>
-      </Link>
-    );
+const FALLBACK_PORTRAIT = "/assets/kundali-reading.jpg";
+
+async function fetchSpotlight(): Promise<{
+  services: ServicesSettings;
+  portrait: string;
+}> {
+  try {
+    const supabase = getServiceClient();
+    const [servicesRes, aboutRes] = await Promise.all([
+      supabase.from("services_settings").select("*").eq("id", 1).maybeSingle(),
+      supabase.from("about_settings").select("photo_url").eq("id", 1).maybeSingle(),
+    ]);
+    const services = (servicesRes.data as ServicesSettings | null) ?? SERVICES_DEFAULTS;
+    const portrait =
+      (aboutRes.data as Pick<AboutSettings, "photo_url"> | null)?.photo_url ||
+      FALLBACK_PORTRAIT;
+    return { services, portrait };
+  } catch {
+    return { services: SERVICES_DEFAULTS, portrait: FALLBACK_PORTRAIT };
   }
+}
+
+export default async function OfferingCarousel() {
+  const { services, portrait } = await fetchSpotlight();
 
   return (
-    <Carousel>
-      {offerings.map((o) => (
-        <Link
-          key={o.title}
-          href={o.href}
-          className="group flex flex-col flex-[0_0_min(100%,17.5rem)] sm:flex-[0_0_20rem] lg:flex-[0_0_21rem] bg-surface-container-lowest rounded-2xl overflow-hidden ak-card ring-1 ring-black/5 hover:ring-primary/30"
-        >
-          <div className="overflow-hidden aspect-[4/3]">
+    <Link
+      href="/services"
+      className="group block bg-surface-container-lowest rounded-3xl overflow-hidden ak-card ring-1 ring-black/5 hover:ring-primary/30 transition-all"
+    >
+      <div className="grid md:grid-cols-[1.15fr_1fr]">
+        {/* Visual panel: portrait + companion image */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 bg-surface-container">
+          <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[22rem] md:min-h-[26rem] overflow-hidden">
             <Image
-              src={o.img}
-              alt=""
-              width={400}
-              height={300}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
+              src={portrait}
+              alt="Astrologer Krupali R."
+              fill
+              sizes="(min-width: 1024px) 28vw, (min-width: 640px) 30vw, 100vw"
+              className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
             />
           </div>
-          <div className="p-5 flex flex-col flex-1">
-            <h3 className="font-headline text-lg text-primary mb-2">{o.title}</h3>
-            <p className="text-sm text-on-surface-variant flex-1">{o.blurb}</p>
-            <span className="mt-4 text-sm font-bold text-secondary group-hover:text-primary transition-colors">
-              Learn more →
-            </span>
+          <div className="relative hidden sm:block sm:min-h-[22rem] md:min-h-[26rem] overflow-hidden border-l border-white/40">
+            <Image
+              src={services.hero_image_url}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 28vw, 30vw"
+              className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
+            />
+            {/* Soft gradient overlay to tie into the card palette */}
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10 mix-blend-soft-light"
+            />
           </div>
-        </Link>
-      ))}
-    </Carousel>
+        </div>
+
+        {/* Text panel */}
+        <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+          <p className="text-secondary text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-3">
+            {services.hero_eyebrow}
+          </p>
+          <h3 className="font-headline text-2xl sm:text-3xl text-primary mb-4 italic">
+            {services.hero_title}
+          </h3>
+          <p className="text-on-surface-variant leading-relaxed mb-6 text-sm sm:text-base">
+            {services.hero_blurb}
+          </p>
+          <span className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all">
+            Explore sittings
+            <span className="material-symbols-outlined text-base" aria-hidden="true">
+              arrow_forward
+            </span>
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }

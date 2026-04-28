@@ -10,6 +10,11 @@ import MeetKrupali from "@/components/MeetKrupali";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import SocialStrip from "@/components/SocialStrip";
 
+// Revalidate at most every minute so admin edits to services/about/etc.
+// flow through to the home page (cosmic offering spotlight pulls from
+// services_settings + about_settings via OfferingCarousel).
+export const revalidate = 60;
+
 export default function HomePage() {
   return (
     <>

@@ -151,14 +151,6 @@ export const QUIZ_RESULT_LABELS: Record<QuizResultKey, string> = {
   D: "Black Tourmaline — The Protective Guardian",
 };
 
-export interface Offering {
-  title: string;
-  blurb: string;
-  href: string;
-  img: string;
-  img2?: string;
-}
-
 export interface SocialLink {
   id: string;
   label: string;

@@ -1,4 +1,4 @@
-import { Offering, SocialLink } from "@/types";
+import { SocialLink } from "@/types";
 
 export const brand = "Auric Krystals";
 export const email = "astrokrupa16@gmail.com";
@@ -34,13 +34,7 @@ export const social: SocialLink[] = [
   },
 ];
 
-export const offerings: Offering[] = [
-  {
-    title: "Kundali readings",
-    blurb:
-      "A personalized Vedic birth-chart analysis — decoding planetary placements across the twelve houses to reveal life purpose, timing, and karmic patterns.",
-    href: "/services",
-    img: "/assets/kundali-reading.jpg",
-    img2: "/assets/kundali-zodiac.jpg",
-  },
-];
+// `offerings` was the static feed for the home-page "Cosmic offerings"
+// spotlight. It now reads directly from services_settings + about_settings
+// inside src/components/OfferingCarousel.tsx, so this list is no longer
+// needed.
