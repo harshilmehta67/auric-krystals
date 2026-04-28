@@ -82,15 +82,29 @@ CREATE TRIGGER about_settings_updated_at
   BEFORE UPDATE ON about_settings
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
--- Seed default Krupali bio (admin can edit live).
-INSERT INTO about_settings (id, bio_short, bio_long, photo_url)
+-- Seed default Krupali bio + social links (admin can edit live from /admin/about).
+INSERT INTO about_settings (id, bio_short, bio_long, photo_url, instagram_url, whatsapp_link)
 VALUES (
   1,
   'Vedic astrologer & crystal curator. Hand-picks every piece in the shop and offers personal Kundali sittings.',
   'Krupali R. has been studying Vedic astrology and crystal energetics for over a decade. Each stone in the Auric Krystals shop is hand-selected by her, energy-cleansed, and matched to the intention you bring. Beyond the shop, Krupali offers private Kundali sittings — a quiet, no-upsell space to map planetary placements onto the season of life you''re actually living.',
-  '/assets/kundali-reading.jpg'
+  '/assets/kundali-reading.jpg',
+  'https://www.instagram.com/auric_krystals?igsh=eWJwaW5td3RtN293',
+  'https://chat.whatsapp.com/G7y78B5CoFh5a5W8ap8MsL'
 )
 ON CONFLICT (id) DO NOTHING;
+
+-- Backfill social links if a previous run of this migration left them empty.
+-- Safe to run repeatedly; only writes when the column is currently null/blank.
+UPDATE about_settings
+SET
+  instagram_url = COALESCE(NULLIF(instagram_url, ''), 'https://www.instagram.com/auric_krystals?igsh=eWJwaW5td3RtN293'),
+  whatsapp_link = COALESCE(NULLIF(whatsapp_link, ''), 'https://chat.whatsapp.com/G7y78B5CoFh5a5W8ap8MsL')
+WHERE id = 1
+  AND (
+    instagram_url IS NULL OR instagram_url = ''
+    OR whatsapp_link IS NULL OR whatsapp_link = ''
+  );
 
 -- =========================================================
 -- 3. Trust bar items
