@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <div className="pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-8 max-w-screen-2xl mx-auto ak-mesh min-h-screen">
+    <div className="pt-32 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-8 max-w-screen-2xl mx-auto ak-mesh min-h-screen">
       <header className="mb-10 sm:mb-14 max-w-3xl">
         <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-3">
           Collection

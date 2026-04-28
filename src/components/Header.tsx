@@ -74,19 +74,21 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
           </span>
         </div>
       </div>
-      <nav className="ak-site-header__inner flex justify-between items-center w-full px-4 sm:px-8 lg:px-10 py-2.5 relative">
-        <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0 group">
+      <nav className="ak-site-header__inner flex justify-between items-center w-full px-4 sm:px-8 lg:px-10 py-3 sm:py-4 relative">
+        <Link
+          href="/"
+          aria-label="Auric Krystals — home"
+          className="flex items-center min-w-0 group basis-[40%] sm:basis-[38%] md:basis-[34%] lg:basis-[32%] shrink-0"
+        >
           <Image
-            src="/assets/AURIC KRYSTALS LOGO.png"
+            src="/assets/auric-krystals-logo.png"
             alt="Auric Krystals"
-            width={168}
-            height={36}
-            className="h-8 sm:h-9 w-auto max-w-[10.5rem] object-contain object-left shrink-0 transition-opacity group-hover:opacity-90"
+            width={1267}
+            height={206}
+            sizes="(min-width: 1024px) 28vw, (min-width: 640px) 32vw, 42vw"
+            className="h-12 sm:h-14 md:h-16 w-auto max-w-full object-contain object-left transition-opacity group-hover:opacity-90"
             priority
           />
-          <span className="hidden sm:inline text-base sm:text-lg font-headline italic text-primary tracking-tight truncate">
-            Auric Krystals
-          </span>
         </Link>
 
         <div className="ak-nav-desktop hidden md:flex items-center">

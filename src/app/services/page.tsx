@@ -12,7 +12,7 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-8 ak-mesh">
+      <section className="pt-32 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-8 ak-mesh">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[1.05fr_1fr] gap-10 lg:gap-14 items-center">
           <div>
             <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-4">

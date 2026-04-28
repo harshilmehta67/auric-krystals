@@ -11,7 +11,7 @@ export default function HomePage() {
     <>
       <QuizAutoStart />
       {/* Hero */}
-      <section className="relative min-h-[100svh] flex items-center overflow-hidden pt-28 pb-16 sm:pt-32 ak-mesh">
+      <section className="relative min-h-[100svh] flex items-center overflow-hidden pt-32 pb-16 sm:pt-36 ak-mesh">
         <div
           className="absolute top-[-15%] right-[-20%] w-[min(90vw,36rem)] h-[min(90vw,36rem)] bg-primary/15 rounded-full blur-[100px] pointer-events-none"
           aria-hidden="true"
@@ -54,11 +54,12 @@ export default function HomePage() {
               aria-hidden="true"
             />
             <Image
-              alt="Amethyst crystal specimen"
+              alt="Heart-shaped amethyst geode"
               className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl shadow-2xl ring-1 ring-black/5 ak-card"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8aGtvJmszyYdGkWfu74x0wRjKPcQZpPlIK6u-YbQ10f2EVnVGuSSagyCcBrJj7L3rtXKYnUmWDwbVd2VEU2_CQM10J8KdLKeF-eg8XTrxwLGi2aGE-K12rDsCmen0IWw-w3gxEJV1niGBWs20-suicvH3xwOa8FgcW5UP_EsbQ6rwf9hgSsxzPCpzWjvJHo-ML3Jw2Eh2nPXQTmz2hHqRtZeuf3-gM-SOg5xplx4iRpPG5fXAaRwZeqyQPHV_2GlJxhlsc13Pys1i"
-              width={800}
-              height={1000}
+              src="/assets/amethyst-heart.jpg"
+              width={768}
+              height={1024}
+              sizes="(min-width: 1024px) 42vw, 100vw"
               priority
             />
           </div>

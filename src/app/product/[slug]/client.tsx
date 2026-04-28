@@ -11,7 +11,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const images = [product.image_url, product.image_url_2].filter(Boolean) as string[];
 
   return (
-    <div className="pt-28 sm:pt-32 pb-16 sm:pb-20">
+    <div className="pt-32 sm:pt-36 pb-16 sm:pb-20">
       <nav className="max-w-screen-2xl mx-auto px-4 sm:px-8 mb-8 text-sm text-on-surface-variant">
         <Link href="/" className="hover:text-primary transition-colors">Home</Link>
         <span className="mx-2 opacity-50">/</span>

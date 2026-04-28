@@ -80,7 +80,7 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-8 max-w-4xl mx-auto min-h-screen text-center">
+      <div className="pt-32 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-8 max-w-4xl mx-auto min-h-screen text-center">
         <span className="material-symbols-outlined text-6xl text-outline-variant mb-6 block mt-20">shopping_bag</span>
         <h1 className="text-2xl font-headline text-primary mb-4">Your cart is empty</h1>
         <Link href="/shop" className="inline-flex ak-btn-primary px-8 py-4 bg-primary text-on-primary rounded-full font-bold">
@@ -91,7 +91,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-8 max-w-6xl mx-auto min-h-screen">
+    <div className="pt-32 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-8 max-w-6xl mx-auto min-h-screen">
       <h1 className="text-3xl sm:text-4xl font-headline font-semibold text-primary mb-8">Checkout</h1>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">

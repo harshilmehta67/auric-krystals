@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="relative min-h-[50vh] sm:min-h-[55vh] flex items-center overflow-hidden pt-28 pb-12 sm:pt-32 ak-mesh">
+      <section className="relative min-h-[50vh] sm:min-h-[55vh] flex items-center overflow-hidden pt-32 pb-12 sm:pt-36 ak-mesh">
         <div
           className="absolute top-[-15%] right-[-15%] w-[min(70vw,24rem)] h-[min(70vw,24rem)] bg-primary/12 rounded-full blur-[80px] pointer-events-none"
           aria-hidden="true"

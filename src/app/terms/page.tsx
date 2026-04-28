@@ -1,6 +1,6 @@
 export default function TermsPage() {
   return (
-    <div className="pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-8 max-w-3xl mx-auto min-h-screen">
+    <div className="pt-32 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-8 max-w-3xl mx-auto min-h-screen">
       <h1 className="text-3xl sm:text-4xl font-headline font-semibold text-primary mb-8">
         Terms &amp; Conditions
       </h1>
