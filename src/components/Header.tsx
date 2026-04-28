@@ -18,6 +18,8 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [badgeBounce, setBadgeBounce] = useState(false);
   const prevTotalRef = useRef(totalItems);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const drawerCloseRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -31,11 +33,35 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
   useEffect(() => {
     if (mobileNavOpen) {
       document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
+      // Focus the close button so the SR announces the drawer and tab order is sane.
+      const t = setTimeout(() => drawerCloseRef.current?.focus(), 30);
+      return () => {
+        clearTimeout(t);
+        document.body.classList.remove("overflow-hidden");
+      };
     }
+    document.body.classList.remove("overflow-hidden");
     return () => document.body.classList.remove("overflow-hidden");
   }, [mobileNavOpen]);
+
+  // Esc closes the mobile drawer and returns focus to the hamburger.
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setMobileNavOpen(false);
+        hamburgerRef.current?.focus();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileNavOpen]);
+
+  function closeDrawer() {
+    setMobileNavOpen(false);
+    // Defer so the drawer's hidden class lands before refocus moves the ring.
+    setTimeout(() => hamburgerRef.current?.focus(), 0);
+  }
 
   useEffect(() => {
     if (totalItems > prevTotalRef.current) {
@@ -108,7 +134,8 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
           <button
             type="button"
             onClick={onQuizOpen}
-            className="text-secondary hover:text-primary transition-colors font-medium cursor-pointer bg-transparent border-none uppercase text-[0.8125rem] font-semibold tracking-[0.08em] pb-[0.35rem]"
+            className="ak-quiz-pill"
+            aria-label="Take the crystal quiz"
           >
             Crystal Quiz
           </button>
@@ -116,22 +143,29 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
 
         <div className="flex items-center gap-1 sm:gap-2">
           <button
+            ref={hamburgerRef}
             type="button"
             className="md:hidden p-2.5 rounded-xl text-primary hover:bg-primary-fixed/40 transition-colors"
             aria-label="Open menu"
+            aria-expanded={mobileNavOpen}
+            aria-controls="ak-mobile-drawer"
             onClick={() => setMobileNavOpen(true)}
           >
-            <span className="material-symbols-outlined text-2xl">menu</span>
+            <span className="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
           </button>
           <button
             type="button"
             onClick={onCartOpen}
             className="relative p-2.5 rounded-xl text-primary hover:bg-primary-fixed/40 transition-colors"
-            aria-label="Open cart"
+            aria-label={totalItems > 0 ? `Open cart, ${totalItems} item${totalItems === 1 ? "" : "s"}` : "Open cart"}
           >
-            <span className="material-symbols-outlined">shopping_bag</span>
+            <span className="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
+            <span className="sr-only" aria-live="polite" aria-atomic="true">
+              {totalItems > 0 ? `${totalItems} item${totalItems === 1 ? "" : "s"} in cart` : "Cart empty"}
+            </span>
             {totalItems > 0 && (
               <span
+                aria-hidden="true"
                 className={`absolute -top-0.5 -right-0.5 w-5 h-5 bg-secondary text-on-secondary text-[10px] font-bold rounded-full flex items-center justify-center transition-transform ${
                   badgeBounce ? "animate-cart-bounce" : ""
                 }`}
@@ -144,23 +178,28 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
 
         {/* Mobile nav drawer */}
         <div
+          id="ak-mobile-drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
           className={`fixed inset-0 z-[60] ${mobileNavOpen ? "" : "hidden"} md:hidden`}
           aria-hidden={!mobileNavOpen}
         >
           <div
             className="absolute inset-0 bg-black/45 ak-nav-blur"
-            onClick={() => setMobileNavOpen(false)}
+            onClick={closeDrawer}
           />
           <div className="ak-site-header__drawer absolute right-0 top-0 h-full w-[min(100%,18rem)] sm:w-80 shadow-2xl flex flex-col p-6 border-l border-outline-variant/25">
             <div className="flex justify-between items-center mb-8">
               <span className="font-headline text-primary text-lg">Explore</span>
               <button
+                ref={drawerCloseRef}
                 type="button"
-                onClick={() => setMobileNavOpen(false)}
+                onClick={closeDrawer}
                 className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors"
                 aria-label="Close menu"
               >
-                <span className="material-symbols-outlined">close</span>
+                <span className="material-symbols-outlined" aria-hidden="true">close</span>
               </button>
             </div>
             <nav className="flex flex-col gap-1">
@@ -168,7 +207,7 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileNavOpen(false)}
+                  onClick={closeDrawer}
                   className={
                     isActive(link.href)
                       ? "py-3 px-4 rounded-xl bg-primary-fixed/50 text-primary font-medium"
@@ -181,10 +220,10 @@ export default function Header({ onCartOpen, onQuizOpen }: HeaderProps) {
               <button
                 type="button"
                 onClick={() => {
-                  setMobileNavOpen(false);
+                  closeDrawer();
                   onQuizOpen();
                 }}
-                className="py-3 px-4 rounded-xl text-secondary font-medium hover:bg-secondary-fixed/30 transition-colors text-left"
+                className="mt-3 ak-quiz-pill self-start"
               >
                 Crystal Quiz
               </button>

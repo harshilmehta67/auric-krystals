@@ -40,8 +40,8 @@ export default function CartPage() {
                     <button onClick={() => updateQuantity(item.slug, item.quantity + 1)}
                       className="w-8 h-8 rounded-full border border-outline-variant/40 flex items-center justify-center hover:bg-surface-container transition-colors font-bold">+</button>
                     <span className="text-sm text-on-surface-variant ml-2">= {"\u20B9"}{(item.price * item.quantity).toFixed(2)}</span>
-                    <button onClick={() => removeItem(item.slug)} className="ml-auto text-on-surface-variant hover:text-red-500 transition-colors" aria-label="Remove item">
-                      <span className="material-symbols-outlined">delete</span>
+                    <button onClick={() => removeItem(item.slug)} className="ml-auto text-on-surface-variant hover:text-red-500 transition-colors" aria-label={`Remove ${item.title}`}>
+                      <span className="material-symbols-outlined" aria-hidden="true">delete</span>
                     </button>
                   </div>
                 </div>

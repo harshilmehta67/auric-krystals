@@ -71,7 +71,7 @@ export default function Carousel({ children }: CarouselProps) {
           aria-label="Previous"
           onClick={() => scroll(-1)}
         >
-          <span className="material-symbols-outlined text-2xl">chevron_left</span>
+          <span className="material-symbols-outlined text-2xl" aria-hidden="true">chevron_left</span>
         </button>
         <div className="ak-carousel__viewport flex-1 min-w-0 px-0.5">
           <div
@@ -91,7 +91,7 @@ export default function Carousel({ children }: CarouselProps) {
           aria-label="Next"
           onClick={() => scroll(1)}
         >
-          <span className="material-symbols-outlined text-2xl">chevron_right</span>
+          <span className="material-symbols-outlined text-2xl" aria-hidden="true">chevron_right</span>
         </button>
       </div>
       {count > 1 && (

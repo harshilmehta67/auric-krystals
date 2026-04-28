@@ -72,7 +72,7 @@ export default function ContactPage() {
                     <a key={s.id} href={s.url} rel="noopener noreferrer" target="_blank"
                       className="w-12 h-12 rounded-full bg-surface-container-lowest border border-outline-variant/20 hover:border-primary/40 flex items-center justify-center text-primary transition-colors"
                       aria-label={s.shortLabel}>
-                      <span className="material-symbols-outlined text-[22px]">{s.icon}</span>
+                      <span className="material-symbols-outlined text-[22px]" aria-hidden="true">{s.icon}</span>
                     </a>
                   ))}
                 </div>

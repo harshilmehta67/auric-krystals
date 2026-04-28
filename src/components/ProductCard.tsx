@@ -85,6 +85,7 @@ export default function ProductCard({ product, variant = "carousel" }: ProductCa
               aria-label={`Add ${product.title} to cart`}
             >
               <span
+                aria-hidden="true"
                 className={`material-symbols-outlined text-base leading-none transition-transform duration-300 ${
                   justAdded ? "rotate-0" : ""
                 }`}

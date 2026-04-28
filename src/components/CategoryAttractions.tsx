@@ -158,8 +158,8 @@ function CategoryTileCard({ tile, delay, wide, className }: CategoryTileCardProp
         ))}
       </div>
 
-      {/* Soft gradient overlay — keeps the label legible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent pointer-events-none" />
+      {/* Soft gradient overlay — lighter so product imagery underneath stays cinematic, not muddy. */}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent pointer-events-none" />
 
       {/* Image-count pip row (only if >1 image) */}
       {hasMultiple && (
@@ -186,7 +186,7 @@ function CategoryTileCard({ tile, delay, wide, className }: CategoryTileCardProp
         )}
         <span className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white/95 group-hover:gap-2.5 transition-all">
           Browse collection
-          <span className="material-symbols-outlined text-base">arrow_forward</span>
+          <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
         </span>
       </div>
     </Link>
@@ -211,7 +211,7 @@ function ServicesTile({ className }: { className?: string }) {
         sizes="(min-width: 1024px) 25vw, 50vw"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
       <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7">
         <h3 className="font-headline text-xl sm:text-2xl text-white mb-1">Services</h3>
         <p className="text-white/85 text-xs sm:text-sm">
@@ -219,7 +219,7 @@ function ServicesTile({ className }: { className?: string }) {
         </p>
         <span className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white/95 group-hover:gap-2.5 transition-all">
           Explore sittings
-          <span className="material-symbols-outlined text-base">arrow_forward</span>
+          <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
         </span>
       </div>
     </Link>

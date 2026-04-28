@@ -57,7 +57,7 @@ export default function OfferingCarousel() {
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all">
               Explore sittings
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+              <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
             </span>
           </div>
         </div>

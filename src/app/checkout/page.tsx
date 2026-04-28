@@ -160,7 +160,7 @@ export default function CheckoutPage() {
                 href={upiLink}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full font-bold text-sm hover:bg-green-700 transition-colors"
               >
-                <span className="material-symbols-outlined text-lg">payments</span>
+                <span className="material-symbols-outlined text-lg" aria-hidden="true">payments</span>
                 Pay {"\u20B9"}{totalPrice.toFixed(2)} via UPI
               </a>
             </div>

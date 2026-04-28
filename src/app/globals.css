@@ -440,6 +440,99 @@ body.ak-page > script {
     margin-top: 0.75rem;
 }
 
+/* Section-label ornament — used on the single most important label (hero) so the
+   repeated uppercase tracked labels don't all look identical. Pure CSS so it
+   honors prefers-reduced-motion. */
+.ak-section-label--ornament {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.ak-section-label--ornament::before,
+.ak-section-label--ornament::after {
+    content: "✦";
+    font-size: 0.7em;
+    color: rgba(115, 92, 0, 0.6);
+    line-height: 1;
+    transform: translateY(-1px);
+}
+
+/* Skip link — invisible until focused, sits above all chrome when active. */
+.ak-skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: #685682;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 14px 32px rgba(29, 27, 30, 0.18);
+    transform: translateY(-200%);
+    transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ak-skip-link:focus,
+.ak-skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid rgba(212, 175, 55, 0.6);
+    outline-offset: 2px;
+}
+
+/* Universal fallback focus ring — `:where()` keeps specificity at 0 so explicit
+   focus-visible rules elsewhere still win. Covers links, buttons, [role=button]
+   tiles, and any custom tabindex element so keyboard users always see a target. */
+:where(a, button, [role="button"], [tabindex]):focus-visible {
+    outline: 2px solid rgba(104, 86, 130, 0.55);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Quiz nav pill — visually intentional rather than the half-aligned text link
+   it used to be. Slightly raised hover so it reads as a CTA. */
+.ak-quiz-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(254, 214, 91, 0.95) 0%, rgba(233, 195, 73, 0.95) 100%);
+    color: #3d2f00;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    border: 1px solid rgba(115, 92, 0, 0.18);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.25s ease;
+    cursor: pointer;
+}
+
+.ak-quiz-pill::before {
+    content: "✦";
+    font-size: 0.85em;
+    color: rgba(61, 47, 0, 0.75);
+    line-height: 1;
+}
+
+.ak-quiz-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.32);
+    background: linear-gradient(135deg, rgba(255, 224, 136, 1) 0%, rgba(254, 214, 91, 1) 100%);
+}
+
+.ak-quiz-pill:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2);
+}
+
 @keyframes ak-fade-up {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }

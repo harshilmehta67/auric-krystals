@@ -32,14 +32,17 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors"
             aria-label="Close cart"
           >
-            <span className="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined" aria-hidden="true">close</span>
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-6 space-y-4">
           {items.length === 0 ? (
             <div className="text-center py-12">
-              <span className="material-symbols-outlined text-5xl text-outline-variant mb-4 block">
+              <span
+                className="material-symbols-outlined text-5xl text-outline-variant mb-4 block"
+                aria-hidden="true"
+              >
                 shopping_bag
               </span>
               <p className="text-on-surface-variant">Your cart is empty</p>
@@ -88,9 +91,9 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                     <button
                       onClick={() => removeItem(item.slug)}
                       className="ml-auto text-on-surface-variant hover:text-red-500 transition-colors"
-                      aria-label="Remove"
+                      aria-label={`Remove ${item.title}`}
                     >
-                      <span className="material-symbols-outlined text-lg">
+                      <span className="material-symbols-outlined text-lg" aria-hidden="true">
                         delete
                       </span>
                     </button>

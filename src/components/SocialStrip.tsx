@@ -49,7 +49,7 @@ export default function SocialStrip() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-amber-400 text-white text-xs font-bold uppercase tracking-widest hover:opacity-95 transition-opacity"
               >
-                <span className="material-symbols-outlined text-base">photo_camera</span>
+                <span className="material-symbols-outlined text-base" aria-hidden="true">photo_camera</span>
                 Instagram
               </a>
             )}
@@ -60,7 +60,7 @@ export default function SocialStrip() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-600 text-white text-xs font-bold uppercase tracking-widest hover:bg-green-700 transition-colors"
               >
-                <span className="material-symbols-outlined text-base">forum</span>
+                <span className="material-symbols-outlined text-base" aria-hidden="true">forum</span>
                 WhatsApp circle
               </a>
             )}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Link from "next/link";
 import ProductGrid from "@/components/ProductGrid";
 
 export const metadata: Metadata = {
@@ -10,6 +11,26 @@ export const metadata: Metadata = {
 export default function ShopPage() {
   return (
     <div className="pt-32 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-8 max-w-screen-2xl mx-auto ak-mesh min-h-screen">
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant/85"
+      >
+        <ol className="flex flex-wrap items-center gap-1">
+          <li>
+            <Link href="/" className="hover:text-secondary transition-colors">
+              Home
+            </Link>
+          </li>
+          <li aria-hidden="true" className="opacity-60">
+            /
+          </li>
+          <li>
+            <span className="text-primary" aria-current="page">
+              Shop
+            </span>
+          </li>
+        </ol>
+      </nav>
       <header className="mb-10 sm:mb-14 max-w-3xl">
         <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-3">
           Collection

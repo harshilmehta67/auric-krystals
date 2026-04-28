@@ -54,8 +54,11 @@ export default function CartToast({ data, onClose, onCartOpen }: CartToastProps)
           <p className="text-sm font-semibold text-on-surface truncate">
             {data.title}
           </p>
-          <p className="text-xs text-green-600 font-medium">
-            <span className="material-symbols-outlined text-xs align-middle mr-0.5">
+          <p className="text-xs text-green-600 font-medium" aria-live="polite">
+            <span
+              className="material-symbols-outlined text-xs align-middle mr-0.5"
+              aria-hidden="true"
+            >
               check_circle
             </span>
             Added to cart

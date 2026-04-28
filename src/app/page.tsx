@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-8 z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-6 space-y-6 sm:space-y-8 ak-animate-in">
             <p className="text-secondary font-label text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold">
-              Welcome to Auric Krystals
+              <span className="ak-section-label--ornament">Welcome to Auric Krystals</span>
             </p>
             <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl text-primary leading-[1.12] tracking-tight">
               Where Earth&apos;s Treasures Meet{" "}
@@ -83,7 +83,7 @@ export default function HomePage() {
               <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-2">
                 Collection
               </p>
-              <h2 className="font-headline text-2xl sm:text-4xl text-primary italic">
+              <h2 className="font-headline text-2xl sm:text-4xl text-primary">
                 Featured pieces
               </h2>
               <p className="text-on-surface-variant text-sm sm:text-base mt-2 max-w-xl">
@@ -109,7 +109,7 @@ export default function HomePage() {
               <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-2">
                 Guidance
               </p>
-              <h2 className="font-headline text-2xl sm:text-4xl text-primary italic">
+              <h2 className="font-headline text-2xl sm:text-4xl text-primary">
                 Cosmic offerings
               </h2>
               <p className="text-on-surface-variant text-sm sm:text-base mt-2 max-w-xl">
@@ -138,7 +138,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 sm:mb-16">
             <div className="max-w-xl">
-              <h2 className="font-headline text-3xl sm:text-4xl text-primary mb-4 italic">
+              <h2 className="font-headline text-3xl sm:text-4xl text-primary mb-4">
                 Key Attractions
               </h2>
               <p className="text-on-surface-variant font-light tracking-wide text-sm sm:text-base leading-relaxed">

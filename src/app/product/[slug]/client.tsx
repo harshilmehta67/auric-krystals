@@ -13,12 +13,42 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
   return (
     <div className="pt-32 sm:pt-36 pb-16 sm:pb-20">
-      <nav className="max-w-screen-2xl mx-auto px-4 sm:px-8 mb-8 text-sm text-on-surface-variant">
-        <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-        <span className="mx-2 opacity-50">/</span>
-        <Link href="/shop" className="hover:text-primary transition-colors">Shop</Link>
-        <span className="mx-2 opacity-50">/</span>
-        <span className="text-primary font-medium">{product.title}</span>
+      <nav
+        aria-label="Breadcrumb"
+        className="max-w-screen-2xl mx-auto px-4 sm:px-8 mb-8 text-sm text-on-surface-variant"
+      >
+        <ol className="flex flex-wrap items-center gap-1">
+          <li>
+            <Link href="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
+          </li>
+          <li aria-hidden="true" className="mx-1 opacity-50">/</li>
+          <li>
+            <Link href="/shop" className="hover:text-primary transition-colors">
+              Shop
+            </Link>
+          </li>
+          {product.category_name && (
+            <>
+              <li aria-hidden="true" className="mx-1 opacity-50">/</li>
+              <li>
+                <Link
+                  href={`/shop#${product.category_id ?? ""}`}
+                  className="hover:text-primary transition-colors"
+                >
+                  {product.category_name}
+                </Link>
+              </li>
+            </>
+          )}
+          <li aria-hidden="true" className="mx-1 opacity-50">/</li>
+          <li>
+            <span className="text-primary font-medium" aria-current="page">
+              {product.title}
+            </span>
+          </li>
+        </ol>
       </nav>
 
       <section className="max-w-screen-2xl mx-auto px-4 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">

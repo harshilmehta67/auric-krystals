@@ -20,7 +20,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
       onClick={handleAdd}
       className="flex-1 ak-btn-primary inline-flex justify-center items-center gap-2 px-8 py-4 bg-primary text-on-primary rounded-full font-bold text-center"
     >
-      <span className="material-symbols-outlined text-xl">
+      <span className="material-symbols-outlined text-xl" aria-hidden="true">
         {added ? "check" : "add_shopping_cart"}
       </span>
       {added ? "Added to Cart!" : "Add to Cart"}

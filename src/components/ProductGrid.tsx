@@ -215,7 +215,7 @@ export default function ProductGrid() {
   if (products.length === 0) {
     return (
       <div className="text-center py-16 text-on-surface-variant">
-        <span className="material-symbols-outlined text-5xl mb-4 block">
+        <span className="material-symbols-outlined text-5xl mb-4 block" aria-hidden="true">
           inventory_2
         </span>
         <p>No products available yet</p>
@@ -230,7 +230,10 @@ export default function ProductGrid() {
         {validMatch && (
           <div className="rounded-2xl bg-primary-fixed/40 ring-1 ring-primary/15 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5">
+              <span
+                className="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5"
+                aria-hidden="true"
+              >
                 psychology
               </span>
               <div>
@@ -250,7 +253,7 @@ export default function ProductGrid() {
               onClick={() => updateUrl({ match: null })}
               className="self-start sm:self-auto inline-flex items-center gap-1 px-4 py-2 rounded-full bg-white/70 ring-1 ring-black/5 text-xs font-bold uppercase tracking-widest text-primary hover:bg-white transition-colors"
             >
-              <span className="material-symbols-outlined text-base">close</span>
+              <span className="material-symbols-outlined text-base" aria-hidden="true">close</span>
               Clear match
             </button>
           </div>
@@ -317,7 +320,10 @@ export default function ProductGrid() {
         <>
           {filtered.length === 0 ? (
             <div className="text-center py-16 rounded-3xl bg-surface-container-lowest/60 ring-1 ring-black/5">
-              <span className="material-symbols-outlined text-5xl text-outline-variant mb-3 block">
+              <span
+                className="material-symbols-outlined text-5xl text-outline-variant mb-3 block"
+                aria-hidden="true"
+              >
                 search_off
               </span>
               <p className="text-on-surface-variant mb-4">
@@ -375,7 +381,7 @@ export default function ProductGrid() {
                   <p className="text-secondary text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.22em] mb-2">
                     Collection
                   </p>
-                  <h2 className="font-headline text-2xl sm:text-3xl text-primary italic">
+                  <h2 className="font-headline text-2xl sm:text-3xl text-primary">
                     {section.name}
                   </h2>
                 </div>
@@ -410,7 +416,7 @@ export default function ProductGrid() {
             href="/?quiz=1"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-on-primary text-xs font-bold uppercase tracking-widest hover:opacity-95 transition-opacity"
           >
-            <span className="material-symbols-outlined text-base">psychology</span>
+            <span className="material-symbols-outlined text-base" aria-hidden="true">psychology</span>
             Find my crystal
           </Link>
         </div>

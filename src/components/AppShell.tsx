@@ -21,8 +21,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <QuizOpenProvider openQuiz={openQuiz}>
+      <a href="#main-content" className="ak-skip-link">
+        Skip to content
+      </a>
       <Header onCartOpen={openCart} onQuizOpen={openQuiz} />
-      <main className="relative z-[1]">{children}</main>
+      <main id="main-content" tabIndex={-1} className="relative z-[1] focus:outline-none">
+        {children}
+      </main>
       <Footer />
       <CartDrawer open={cartOpen} onClose={closeCart} />
       <QuizModal open={quizOpen} onClose={closeQuiz} />

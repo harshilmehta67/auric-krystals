@@ -72,7 +72,7 @@ export default function ServicesPage() {
             <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-3">
               What your chart reveals
             </p>
-            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-primary italic">
+            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-primary">
               A personal map of your cosmos
             </h2>
           </div>
@@ -131,7 +131,7 @@ export default function ServicesPage() {
             <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-3">
               Choose your sitting
             </p>
-            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-primary italic mb-3">
+            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-primary mb-3">
               Two ways to experience your reading
             </h2>
             <div className="ak-headline-accent mx-auto" />
@@ -271,7 +271,7 @@ export default function ServicesPage() {
             <p className="text-secondary text-xs font-semibold uppercase tracking-[0.25em] mb-3">
               Process
             </p>
-            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-primary italic">
+            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-primary">
               How a sitting works
             </h2>
           </div>
@@ -315,7 +315,7 @@ export default function ServicesPage() {
       {/* CTA */}
       <section className="py-16 sm:py-24 bg-primary text-on-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center">
-          <h2 className="font-headline text-3xl sm:text-4xl mb-4 italic">
+          <h2 className="font-headline text-3xl sm:text-4xl mb-4">
             Begin your journey
           </h2>
           <p className="text-base sm:text-lg mb-8 text-white/90 max-w-2xl mx-auto leading-relaxed">
