@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Product, Category } from "@/types";
+import { Product, Category, ServicesSettings } from "@/types";
+import { SERVICES_DEFAULTS } from "@/lib/services-defaults";
 
 interface CategoryTile {
   slug: string;
@@ -194,6 +195,29 @@ function CategoryTileCard({ tile, delay, wide, className }: CategoryTileCardProp
 }
 
 function ServicesTile({ className }: { className?: string }) {
+  // Initial render uses the bundled defaults so SSR is already on-message
+  // (cosmic image + four-discipline eyebrow). On mount we hydrate with the
+  // live admin-edited values from /api/services, so any change in
+  // /admin/services flows through here too within the home-page revalidate
+  // window (~60s).
+  const [image, setImage] = useState<string>(SERVICES_DEFAULTS.hero_image_url);
+  const [blurb, setBlurb] = useState<string>(SERVICES_DEFAULTS.hero_eyebrow);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/services")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { services: ServicesSettings } | null) => {
+        if (cancelled || !d?.services) return;
+        if (d.services.hero_image_url) setImage(d.services.hero_image_url);
+        if (d.services.hero_eyebrow) setBlurb(d.services.hero_eyebrow);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <Link
       href="/services"
@@ -205,7 +229,7 @@ function ServicesTile({ className }: { className?: string }) {
       <Image
         alt=""
         className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-300"
-        src="/assets/kundali-zodiac.jpg"
+        src={image}
         width={800}
         height={800}
         sizes="(min-width: 1024px) 25vw, 50vw"
@@ -214,9 +238,7 @@ function ServicesTile({ className }: { className?: string }) {
       <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
       <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7">
         <h3 className="font-headline text-xl sm:text-2xl text-white mb-1">Services</h3>
-        <p className="text-white/85 text-xs sm:text-sm">
-          Personal Kundali readings with Krupali R.
-        </p>
+        <p className="text-white/85 text-xs sm:text-sm line-clamp-2">{blurb}</p>
         <span className="mt-3 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white/95 group-hover:gap-2.5 transition-all">
           Explore sittings
           <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
