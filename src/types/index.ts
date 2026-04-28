@@ -78,6 +78,57 @@ export interface QuizMapping {
   products: Product[];
 }
 
+export interface ServicesPillar {
+  key: string;
+  icon: string;
+  title: string;
+  body: string;
+}
+
+export interface ServicesTier {
+  key: string;
+  eyebrow: string;
+  title: string;
+  price_label: string;
+  price_unit: string;
+  duration: string;
+  blurb: string;
+  features: string[];
+  badge_label?: string;
+  cta_label: string;
+  cta_query: string;
+}
+
+export interface ServicesStep {
+  step: string;
+  title: string;
+  body: string;
+}
+
+export interface ServicesSettings {
+  id: number;
+  hero_image_url: string;
+  hero_eyebrow: string;
+  hero_title: string;
+  hero_title_2: string;
+  hero_blurb: string;
+  pillars_eyebrow: string;
+  pillars_title: string;
+  pillars: ServicesPillar[];
+  sittings_eyebrow: string;
+  sittings_title: string;
+  sittings_blurb: string;
+  tiers: ServicesTier[];
+  sittings_footer: string;
+  steps_eyebrow: string;
+  steps_title: string;
+  steps: ServicesStep[];
+  cta_title: string;
+  cta_blurb: string;
+  cta_label: string;
+  updated_at: string;
+}
+
 export const INTENT_TAGS = [
   "love",
   "abundance",

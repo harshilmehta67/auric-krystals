@@ -29,6 +29,7 @@ npm install
 2. Open **SQL Editor** and run, in order:
    - `supabase/schema.sql` — core tables (orders, products, categories, quiz registrations, admin settings)
    - `supabase/migrations/2026-04-28-polish.sql` — testimonials, about, trust bar, social posts, product tags, quiz mappings (idempotent — safe to re-run)
+   - `supabase/migrations/2026-04-28-services.sql` — `services_settings` singleton powering the editorial `/services` page (idempotent)
 3. Create Storage buckets (both public):
    - `screenshots` — payment proof uploads
    - `product-images` — product images, testimonial avatars, Krupali portrait, and social-strip thumbnails (sub-foldered: `products/`, `testimonials/`, `about/`, `social/`)
@@ -82,6 +83,12 @@ Open [http://localhost:3000](http://localhost:3000).
 | `products.tags` | `TEXT[]` (GIN-indexed) powering the shop intent-chip filter |
 | `quiz_result_products` | Many-to-many mapping of quiz outcomes (A/B/C/D) → curated products |
 
+### Services page (`supabase/migrations/2026-04-28-services.sql`)
+
+| Table | Purpose |
+|---|---|
+| `services_settings` | Singleton row driving every word and image on `/services` — hero (image + 3 text fields), 4 fixed disciplines (Astrology / Numerology / Tarot / Vastu), 2 fixed sitting tiers (₹5,000 Essential / ₹11,000 Deep-Dive), 3 fixed process steps, and the closing CTA. Admins can edit copy and the hero image; the structure (number of pillars / tiers / steps) is locked. |
+
 All tables have Row Level Security (RLS) enabled. The service role has full access; the public role can read active rows (`is_featured`, `is_active`, `is_active`-style flags) and the about/quiz-mapping rows directly.
 
 ## Routes
@@ -92,7 +99,7 @@ All tables have Row Level Security (RLS) enabled. The service role has full acce
 | `/` | Home — hero with trust bar, featured carousel, offerings, **Meet Krupali**, **testimonials**, key attractions, **social strip**, closing quote |
 | `/shop` | Product grid with **intent-chip filter**, **sort dropdown**, deep-link **category anchors**, and **`?match=A/B/C/D`** quiz-result mode |
 | `/product/[slug]` | Product detail with image gallery, specifications, Add to Cart, **"You may also love" rail** |
-| `/services` | Astrology & wellness services — Kundali sitting tiers (₹5,000 / ₹11,000) |
+| `/services` | Astrology, Numerology, Tarot & Vastu — fully editorial (admin-editable copy + hero image), with two sitting tiers (₹5,000 Essential / ₹11,000 Deep-Dive) |
 | `/contact` | Contact form + social links |
 | `/cart` | Full cart view with quantity controls |
 | `/checkout` | Order form, dynamic UPI QR code, screenshot upload **with confirmation animation**, transparency strip, sticky order summary |
@@ -109,6 +116,7 @@ All tables have Row Level Security (RLS) enabled. The service role has full acce
 | `/admin/products/[id]/edit` | Edit existing product |
 | `/admin/categories` | Category management — inline add/rename/delete |
 | `/admin/quiz-mappings` | Pick the products that surface for each quiz outcome (A/B/C/D) |
+| `/admin/services` | Edit every word + the hero image on `/services` (structure is locked: 4 disciplines, 2 tiers, 3 steps) |
 | `/admin/testimonials` | Add/edit/delete testimonials, mark featured, upload avatars |
 | `/admin/about` | "Meet Krupali" strip — bio, portrait, Instagram URL, WhatsApp link & number |
 | `/admin/trust-bar` | Edit the three hero trust tiles (icon name + title + subtitle) |
@@ -126,6 +134,7 @@ All tables have Row Level Security (RLS) enabled. The service role has full acce
 | `/api/trust-bar` | GET | Public active trust-bar items |
 | `/api/social-posts` | GET | Public active social posts |
 | `/api/quiz-mappings/[key]` | GET | Curated products for quiz outcome `A`/`B`/`C`/`D` |
+| `/api/services` | GET | Public services-page settings (falls back to defaults if row missing) |
 | *(admin auth)* | — | Handled directly via Supabase Auth (`signInWithPassword`) in the browser with session persistence and auto-refresh |
 | `/api/admin/orders` | GET | List orders (paginated, filterable by status) |
 | `/api/admin/orders/[id]` | GET/PATCH | Get or update order status |
@@ -140,6 +149,7 @@ All tables have Row Level Security (RLS) enabled. The service role has full acce
 | `/api/admin/social-posts` | GET/POST | List or create social posts |
 | `/api/admin/social-posts/[id]` | PATCH/DELETE | Update or delete a social post |
 | `/api/admin/quiz-mappings` | GET/PUT | Read all mappings or replace one result key's product list |
+| `/api/admin/services` | GET/PATCH | Read or update the `services_settings` singleton (multipart for hero image upload) |
 | `/api/admin/settings` | GET/PUT | Read or update admin settings |
 
 ## Features
@@ -176,7 +186,7 @@ All tables have Row Level Security (RLS) enabled. The service role has full acce
 ## Admin Workflows
 
 ### First-time setup checklist (post-deploy)
-1. Run `supabase/schema.sql` then `supabase/migrations/2026-04-28-polish.sql` in Supabase SQL Editor.
+1. Run `supabase/schema.sql`, then `supabase/migrations/2026-04-28-polish.sql`, then `supabase/migrations/2026-04-28-services.sql` in Supabase SQL Editor.
 2. Visit `/admin/login`, sign in with the user you created in Supabase Auth.
 3. **Categories** → add your collections (e.g. Crystals, Bracelets, Pyramids).
 4. **Products** → add products with image, price, description, intent tags, and (optionally) quiz match keys.
@@ -185,7 +195,8 @@ All tables have Row Level Security (RLS) enabled. The service role has full acce
 7. **About / Krupali** → upload her portrait, polish the bio, paste Instagram/WhatsApp links (the migration pre-fills them, edit if needed).
 8. **Trust Bar** → tweak the 3 seeded tiles if you want different copy.
 9. **Social Strip** → add 4–6 Instagram/WhatsApp post screenshots with their permalink URLs.
-10. **Settings** → notification email, phone, UPI ID, Telegram config.
+10. **Services** → optionally tweak the hero image, copy for the four disciplines (Astrology / Numerology / Tarot / Vastu), the two sitting tiers, and the closing CTA. Structure is locked — only content is editable.
+11. **Settings** → notification email, phone, UPI ID, Telegram config.
 
 ### Product flow
 1. Categories at `/admin/categories`.
