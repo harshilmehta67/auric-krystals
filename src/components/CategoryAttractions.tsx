@@ -152,7 +152,7 @@ function CategoryTileCard({ tile, delay, wide, className }: CategoryTileCardProp
             sizes={wide ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
             className={`object-cover transition-opacity duration-[1200ms] ease-in-out ${
               i === active ? "opacity-100" : "opacity-0"
-            } ${i === 0 ? "group-hover:scale-[1.03] transition-transform duration-700" : ""}`}
+            } ${i === 0 ? "group-hover:scale-[1.03] transition-transform duration-300" : ""}`}
             priority={false}
           />
         ))}
@@ -204,10 +204,11 @@ function ServicesTile({ className }: { className?: string }) {
     >
       <Image
         alt=""
-        className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-700"
+        className="w-full h-full object-cover min-h-[14rem] group-hover:scale-[1.03] transition-transform duration-300"
         src="/assets/kundali-zodiac.jpg"
         width={800}
         height={800}
+        sizes="(min-width: 1024px) 25vw, 50vw"
         loading="lazy"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent" />

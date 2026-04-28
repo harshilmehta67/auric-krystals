@@ -21,11 +21,84 @@ export interface Product {
   specifications: string | null;
   category_id: string | null;
   category_name?: string;
+  tags: string[];
   is_active: boolean;
   sort_order: number;
   created_at: string;
   updated_at: string;
 }
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  city: string | null;
+  quote: string;
+  rating: number | null;
+  avatar_url: string | null;
+  is_featured: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AboutSettings {
+  id: number;
+  bio_short: string;
+  bio_long: string;
+  photo_url: string | null;
+  instagram_url: string | null;
+  whatsapp_link: string | null;
+  whatsapp_number: string | null;
+  updated_at: string;
+}
+
+export interface TrustBarItem {
+  id: string;
+  icon_name: string;
+  title: string;
+  subtitle: string;
+  sort_order: number;
+  is_active: boolean;
+  updated_at: string;
+}
+
+export interface SocialPost {
+  id: string;
+  image_url: string;
+  link_url: string;
+  caption: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuizMapping {
+  result_key: "A" | "B" | "C" | "D";
+  products: Product[];
+}
+
+export const INTENT_TAGS = [
+  "love",
+  "abundance",
+  "protection",
+  "calm",
+  "clarity",
+  "healing",
+  "grounding",
+  "prosperity",
+] as const;
+export type IntentTag = (typeof INTENT_TAGS)[number];
+
+export const QUIZ_RESULT_KEYS = ["A", "B", "C", "D"] as const;
+export type QuizResultKey = (typeof QUIZ_RESULT_KEYS)[number];
+
+export const QUIZ_RESULT_LABELS: Record<QuizResultKey, string> = {
+  A: "Rose Quartz — The Heart Healer",
+  B: "Amethyst — The Spiritual Guardian",
+  C: "Citrine — The Abundance Attractor",
+  D: "Black Tourmaline — The Protective Guardian",
+};
 
 export interface Offering {
   title: string;

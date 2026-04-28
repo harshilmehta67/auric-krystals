@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ProductGrid from "@/components/ProductGrid";
 
 export const metadata: Metadata = {
@@ -22,7 +23,9 @@ export default function ShopPage() {
           ship.
         </p>
       </header>
-      <ProductGrid />
+      <Suspense fallback={null}>
+        <ProductGrid />
+      </Suspense>
     </div>
   );
 }

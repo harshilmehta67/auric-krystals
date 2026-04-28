@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCartButton from "@/components/AddToCartButton";
+import AlsoLoveRail from "@/components/AlsoLoveRail";
 import { Product } from "@/types";
 
 export default function ProductDetailClient({ product }: { product: Product }) {
@@ -95,6 +96,8 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           )}
         </div>
       </section>
+
+      <AlsoLoveRail currentSlug={product.slug} categoryId={product.category_id} />
     </div>
   );
 }

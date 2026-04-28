@@ -391,11 +391,11 @@ export default function QuizModal({ open, onClose }: QuizModalProps) {
                   type="button"
                   onClick={() => {
                     onClose();
-                    router.push("/shop");
+                    router.push(`/shop?match=${resultKey}`);
                   }}
                   className="flex-1 py-3.5 bg-primary text-on-primary rounded-xl font-bold hover:opacity-95 transition-opacity"
                 >
-                  Shop {crystal.name}
+                  Shop your match
                 </button>
                 <button
                   type="button"

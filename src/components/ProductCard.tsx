@@ -30,15 +30,35 @@ export default function ProductCard({ product, variant = "carousel" }: ProductCa
 
   return (
     <div className={`${cardClass} transition-shadow duration-300 ${justAdded ? "ring-2 ring-green-400/60 shadow-lg shadow-green-200/30" : ""}`}>
-      <Link href={`/product/${product.slug}`} className="overflow-hidden aspect-[4/3]">
+      <Link
+        href={`/product/${product.slug}`}
+        className="relative overflow-hidden aspect-[4/3] block"
+      >
         <Image
           src={product.image_url}
           alt={product.title}
           width={400}
           height={300}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="(min-width: 1024px) 22rem, (min-width: 640px) 33vw, 100vw"
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+            product.image_url_2
+              ? "group-hover:opacity-0 group-hover:scale-105"
+              : "group-hover:scale-105"
+          }`}
           loading="lazy"
         />
+        {product.image_url_2 && (
+          <Image
+            src={product.image_url_2}
+            alt=""
+            width={400}
+            height={300}
+            sizes="(min-width: 1024px) 22rem, (min-width: 640px) 33vw, 100vw"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        )}
       </Link>
       <div className="p-5 flex flex-col flex-1">
         <Link href={`/product/${product.slug}`}>

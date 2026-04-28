@@ -5,6 +5,10 @@ import OfferingCarousel from "@/components/OfferingCarousel";
 import CategoryAttractions from "@/components/CategoryAttractions";
 import QuizAutoStart from "@/components/QuizAutoStart";
 import FindYourCrystalButton from "@/components/FindYourCrystalButton";
+import TrustBar from "@/components/TrustBar";
+import MeetKrupali from "@/components/MeetKrupali";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import SocialStrip from "@/components/SocialStrip";
 
 export default function HomePage() {
   return (
@@ -44,6 +48,9 @@ export default function HomePage() {
               </Link>
               <FindYourCrystalButton />
             </div>
+            <div className="pt-6">
+              <TrustBar />
+            </div>
           </div>
           <div
             className="lg:col-span-6 relative ak-animate-in"
@@ -61,6 +68,8 @@ export default function HomePage() {
               height={1024}
               sizes="(min-width: 1024px) 42vw, 100vw"
               priority
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAQAAwDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAhEAACAQMEAwEAAAAAAAAAAAABAgMEBREABhIhMUFR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAaEQACAwEBAAAAAAAAAAAAAAAAAQIRAxIx/9oADAMBAAIRAxEAPwCe2FtuTcMt5kvE0kdFFGxiijJDSt0CR3jOAB8yfWqpuW2oNmXClnsM01HHMjHwl2KkMOhHcDr+0aTRFJYjiAAA9DTqJaikkqf/2Q=="
             />
           </div>
         </div>
@@ -118,6 +127,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Meet Krupali */}
+      <MeetKrupali />
+
+      {/* Testimonials */}
+      <TestimonialsCarousel />
+
       {/* Key Attractions */}
       <section className="py-20 sm:py-28 bg-surface-bright border-t border-outline-variant/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -141,6 +156,9 @@ export default function HomePage() {
           <CategoryAttractions />
         </div>
       </section>
+
+      {/* Social strip */}
+      <SocialStrip />
 
       {/* Quote */}
       <section className="py-20 sm:py-32 relative">

@@ -23,7 +23,7 @@ export default function OfferingCarousel() {
                 alt={o.title}
                 fill
                 sizes="(min-width: 1024px) 28vw, (min-width: 640px) 30vw, 100vw"
-                className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
+                className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
               />
             </div>
             {o.img2 && (
@@ -33,7 +33,7 @@ export default function OfferingCarousel() {
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 28vw, 30vw"
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
                 />
                 {/* Soft gradient overlay to tie into the card palette */}
                 <div

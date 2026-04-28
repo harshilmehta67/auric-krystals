@@ -4,7 +4,14 @@ import { useState, useRef, useEffect, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAdmin } from "../layout";
-import { Product, Category } from "@/types";
+import { Product, Category, INTENT_TAGS } from "@/types";
+
+const QUIZ_MATCH_KEYS = [
+  "rose-quartz",
+  "amethyst",
+  "citrine",
+  "black-tourmaline",
+] as const;
 
 interface ProductFormProps {
   product?: Product;
@@ -26,6 +33,8 @@ export default function ProductForm({ product }: ProductFormProps) {
   const [categoryId, setCategoryId] = useState(product?.category_id || "");
   const [isActive, setIsActive] = useState(product?.is_active ?? true);
   const [sortOrder, setSortOrder] = useState(product?.sort_order?.toString() || "0");
+  const [tags, setTags] = useState<string[]>(product?.tags || []);
+  const [tagInput, setTagInput] = useState("");
 
   const [preview1, setPreview1] = useState<string | null>(product?.image_url || null);
   const [preview2, setPreview2] = useState<string | null>(product?.image_url_2 || null);
@@ -49,6 +58,19 @@ export default function ProductForm({ product }: ProductFormProps) {
     else { setFile2(file); setPreview2(url); }
   }
 
+  function toggleTag(tag: string) {
+    const t = tag.trim();
+    if (!t) return;
+    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+  }
+
+  function addCustomTag() {
+    const t = tagInput.trim();
+    if (!t) return;
+    if (!tags.includes(t)) setTags((prev) => [...prev, t]);
+    setTagInput("");
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setSaving(true);
@@ -64,6 +86,7 @@ export default function ProductForm({ product }: ProductFormProps) {
     formData.append("category_id", categoryId);
     formData.append("is_active", isActive ? "true" : "false");
     formData.append("sort_order", sortOrder);
+    formData.append("tags", tags.join(","));
 
     if (file1) {
       formData.append("image", file1);
@@ -154,9 +177,123 @@ export default function ProductForm({ product }: ProductFormProps) {
           <textarea value={specifications} onChange={(e) => setSpecifications(e.target.value)} rows={3} className={inputClass + " resize-y"} placeholder="Origin: India&#10;Care: Dry cloth, avoid prolonged sun&#10;Weight: ~50g" />
           <p className="text-[10px] text-on-surface-variant/60 mt-1">Shown on the product detail page. Leave blank to hide.</p>
         </div>
+      </div>
 
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} className="h-4 w-4 rounded accent-primary" />
+      <div className="bg-white rounded-xl p-6 ring-1 ring-black/5 space-y-5">
+        <div>
+          <h2 className="font-headline text-lg text-primary">Intent tags</h2>
+          <p className="text-xs text-on-surface-variant mt-1">
+            Tags drive shop intent filters (love, abundance...) and aren&apos;t required.
+            Quiz matching is configured separately under Quiz Mappings.
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-widest text-primary mb-1.5">
+            Intents
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {INTENT_TAGS.map((tag) => {
+              const selected = tags.includes(tag);
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => toggleTag(tag)}
+                  className={
+                    selected
+                      ? "px-3 py-1.5 rounded-full text-xs font-semibold bg-primary text-on-primary"
+                      : "px-3 py-1.5 rounded-full text-xs font-semibold border border-outline-variant/40 text-on-surface-variant hover:border-primary/50 hover:text-primary"
+                  }
+                >
+                  {tag}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-widest text-primary mb-1.5">
+            Quiz match keys
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {QUIZ_MATCH_KEYS.map((tag) => {
+              const selected = tags.includes(tag);
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => toggleTag(tag)}
+                  className={
+                    selected
+                      ? "px-3 py-1.5 rounded-full text-xs font-semibold bg-primary text-on-primary"
+                      : "px-3 py-1.5 rounded-full text-xs font-semibold border border-outline-variant/40 text-on-surface-variant hover:border-primary/50 hover:text-primary"
+                  }
+                >
+                  {tag}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-widest text-primary mb-1.5">
+            Add custom tag
+          </label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  addCustomTag();
+                }
+              }}
+              placeholder="Type a tag and press Enter"
+              className={inputClass}
+            />
+            <button
+              type="button"
+              onClick={addCustomTag}
+              className="px-4 py-2 bg-surface-container text-on-surface-variant rounded-lg text-xs font-bold hover:bg-primary-fixed/30"
+            >
+              Add
+            </button>
+          </div>
+
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1 pl-3 pr-1 py-1 bg-primary-fixed/40 rounded-full text-xs text-on-surface font-medium"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => toggleTag(tag)}
+                    className="text-on-surface-variant hover:text-red-500"
+                    aria-label={`Remove ${tag}`}
+                  >
+                    <span className="material-symbols-outlined text-sm">close</span>
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <label className="flex items-center gap-3 cursor-pointer pt-2 border-t border-outline-variant/20">
+          <input
+            type="checkbox"
+            checked={isActive}
+            onChange={(e) => setIsActive(e.target.checked)}
+            className="h-4 w-4 rounded accent-primary"
+          />
           <span className="text-sm text-on-surface">Active (visible on store)</span>
         </label>
       </div>

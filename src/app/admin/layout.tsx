@@ -84,6 +84,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: "/admin", label: "Orders", icon: "receipt_long" },
     { href: "/admin/products", label: "Products", icon: "inventory_2" },
     { href: "/admin/categories", label: "Categories", icon: "category" },
+    { href: "/admin/quiz-mappings", label: "Quiz Mappings", icon: "psychology" },
+    { href: "/admin/testimonials", label: "Testimonials", icon: "format_quote" },
+    { href: "/admin/about", label: "About / Krupali", icon: "person" },
+    { href: "/admin/trust-bar", label: "Trust Bar", icon: "verified" },
+    { href: "/admin/social-posts", label: "Social Strip", icon: "photo_library" },
     { href: "/admin/settings", label: "Settings", icon: "settings" },
   ];
 

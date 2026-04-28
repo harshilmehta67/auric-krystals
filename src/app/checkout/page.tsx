@@ -15,6 +15,7 @@ export default function CheckoutPage() {
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
+  const [uploadConfirm, setUploadConfirm] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const upiId = process.env.NEXT_PUBLIC_UPI_ID || "astrokrupa16@oksbi";
@@ -35,6 +36,8 @@ export default function CheckoutPage() {
     if (file) {
       setScreenshot(file);
       setPreview(URL.createObjectURL(file));
+      setUploadConfirm(true);
+      setTimeout(() => setUploadConfirm(false), 2200);
     }
   }
 
@@ -168,10 +171,15 @@ export default function CheckoutPage() {
               </label>
               <div
                 onClick={() => fileRef.current?.click()}
-                className="border-2 border-dashed border-outline-variant/40 rounded-xl p-6 text-center cursor-pointer hover:border-primary/40 hover:bg-primary-fixed/10 transition-all"
+                className={`relative border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${
+                  uploadConfirm
+                    ? "border-green-500 bg-green-50"
+                    : "border-outline-variant/40 hover:border-primary/40 hover:bg-primary-fixed/10"
+                }`}
               >
                 {preview ? (
                   <div className="space-y-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={preview} alt="Payment screenshot" className="max-h-48 mx-auto rounded-lg" />
                     <p className="text-sm text-primary font-medium">Click to change</p>
                   </div>
@@ -182,15 +190,43 @@ export default function CheckoutPage() {
                     <p className="text-xs text-on-surface-variant/60 mt-1">PNG, JPG up to 5MB</p>
                   </>
                 )}
+                {uploadConfirm && (
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white/80 rounded-xl ak-animate-in">
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="material-symbols-outlined text-5xl text-green-500">check_circle</span>
+                      <p className="text-sm font-bold text-green-700">Screenshot received</p>
+                    </div>
+                  </div>
+                )}
               </div>
               <input ref={fileRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
             </div>
+
+            {/* Transparency strip — what happens next */}
+            <ul
+              role="list"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 pt-2 text-xs text-on-surface-variant"
+            >
+              {[
+                { icon: "fact_check", text: "Verified within 12 hours" },
+                { icon: "auto_awesome", text: "Cleansed before shipping" },
+                { icon: "local_shipping", text: "Tracking sent by email" },
+              ].map((s) => (
+                <li
+                  key={s.text}
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container-low/60 ring-1 ring-black/5"
+                >
+                  <span className="material-symbols-outlined text-lg text-primary">{s.icon}</span>
+                  {s.text}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         {/* Right: Order Summary */}
         <div>
-          <div className="bg-surface-container-lowest rounded-2xl p-6 ring-1 ring-black/5 space-y-4 lg:sticky lg:top-32">
+          <div className="bg-surface-container-lowest rounded-2xl p-6 ring-1 ring-black/5 space-y-4 lg:sticky lg:top-40 lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto">
             <h2 className="font-headline text-xl text-primary">Order Summary</h2>
             <div className="space-y-3 divide-y divide-outline-variant/20">
               {items.map((item) => (

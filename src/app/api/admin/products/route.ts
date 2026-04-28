@@ -42,6 +42,8 @@ export async function POST(request: NextRequest) {
   const categoryId = formData.get("category_id") as string || null;
   const isActive = formData.get("is_active") !== "false";
   const sortOrder = parseInt(formData.get("sort_order") as string || "0");
+  const tagsRaw = formData.get("tags") as string | null;
+  const tags = tagsRaw ? tagsRaw.split(",").map((t) => t.trim()).filter(Boolean) : [];
   const image1 = formData.get("image") as File | null;
   const image2 = formData.get("image2") as File | null;
 
@@ -102,6 +104,7 @@ export async function POST(request: NextRequest) {
       category_id: categoryId || null,
       is_active: isActive,
       sort_order: sortOrder,
+      tags,
     })
     .select()
     .single();

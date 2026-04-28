@@ -66,6 +66,14 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
   const sortOrder = formData.get("sort_order");
   if (sortOrder !== null) updates.sort_order = parseInt(sortOrder as string);
 
+  const tagsRaw = formData.get("tags");
+  if (tagsRaw !== null) {
+    updates.tags = (tagsRaw as string)
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+  }
+
   const image1 = formData.get("image") as File | null;
   if (image1 && image1.size > 0) {
     const ext = image1.name.split(".").pop() || "jpg";
