@@ -48,7 +48,8 @@ export const SERVICES_DEFAULTS: ServicesSettings = {
       key: "essential",
       eyebrow: "Essential sitting",
       title: "Focused consultation",
-      price_label: "₹5,000",
+      price_label: "₹4,999",
+      price_label_usd: "$1,111",
       price_unit: "/ sitting",
       duration: "~45 min · one-on-one",
       blurb:
@@ -67,7 +68,8 @@ export const SERVICES_DEFAULTS: ServicesSettings = {
       key: "deepdive",
       eyebrow: "Deep-Dive sitting",
       title: "Comprehensive consultation",
-      price_label: "₹11,000",
+      price_label: "₹11,111",
+      price_label_usd: "$2,499",
       price_unit: "/ sitting",
       duration: "~90 min · one-on-one + written summary",
       blurb:

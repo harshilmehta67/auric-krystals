@@ -90,6 +90,9 @@ export interface ServicesTier {
   eyebrow: string;
   title: string;
   price_label: string;
+  // Optional USD price label shown to visitors outside India (geo-detected
+  // via x-vercel-ip-country header). Falls back to price_label if empty.
+  price_label_usd?: string;
   price_unit: string;
   duration: string;
   blurb: string;

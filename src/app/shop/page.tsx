@@ -43,6 +43,15 @@ export default function ShopPage() {
           Ethically sourced minerals and healing bracelets — each piece is hand-selected and ready to
           ship.
         </p>
+        <div className="mt-6 inline-flex items-center gap-2.5 rounded-full bg-secondary/15 ring-1 ring-secondary/40 px-4 py-2 text-xs sm:text-sm font-semibold text-primary">
+          <span
+            aria-hidden="true"
+            className="material-symbols-outlined text-base text-secondary"
+          >
+            local_shipping
+          </span>
+          Free delivery on orders above ₹2,500
+        </div>
       </header>
       <Suspense fallback={null}>
         <ProductGrid />

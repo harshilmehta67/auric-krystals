@@ -432,13 +432,13 @@ export default function AdminServicesPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className={labelClass}>Price label</label>
+                    <label className={labelClass}>Price (INR)</label>
                     <input
                       type="text"
                       value={t.price_label}
                       onChange={(e) => updateTier(idx, { price_label: e.target.value })}
                       className={inputClass}
-                      placeholder="₹5,000"
+                      placeholder="₹4,999"
                     />
                   </div>
                   <div>
@@ -451,6 +451,26 @@ export default function AdminServicesPage() {
                       placeholder="/ sitting"
                     />
                   </div>
+                </div>
+                <div>
+                  <label className={labelClass}>
+                    Price (USD — shown to non-India visitors)
+                  </label>
+                  <input
+                    type="text"
+                    value={t.price_label_usd ?? ""}
+                    onChange={(e) =>
+                      updateTier(idx, {
+                        price_label_usd: e.target.value || undefined,
+                      })
+                    }
+                    className={inputClass}
+                    placeholder={idx === 0 ? "$1,111" : "$2,499"}
+                  />
+                  <p className="text-[10px] text-on-surface-variant/60 mt-1">
+                    Detected automatically from request country (Vercel
+                    geo). Falls back to the INR label if left blank.
+                  </p>
                 </div>
                 <div>
                   <label className={labelClass}>Duration</label>

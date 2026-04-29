@@ -92,6 +92,9 @@ export async function PATCH(request: NextRequest) {
         eyebrow: (t.eyebrow ?? "").trim(),
         title: (t.title ?? "").trim(),
         price_label: (t.price_label ?? "").trim(),
+        price_label_usd: t.price_label_usd
+          ? String(t.price_label_usd).trim() || undefined
+          : undefined,
         price_unit: (t.price_unit ?? "").trim(),
         duration: (t.duration ?? "").trim(),
         blurb: (t.blurb ?? "").trim(),

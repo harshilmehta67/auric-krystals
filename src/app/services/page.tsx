@@ -1,12 +1,37 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { getServiceClient } from "@/lib/admin-auth";
 import { SERVICES_DEFAULTS } from "@/lib/services-defaults";
-import type { ServicesSettings } from "@/types";
+import type { ServicesSettings, ServicesTier } from "@/types";
 
-// Re-render at most every minute so admin edits are visible quickly.
-export const revalidate = 60;
+// Note: this route is dynamic per-request because we read the visitor's
+// country from request headers (x-vercel-ip-country) to decide between
+// INR and USD pricing for the sitting tiers. The data fetch itself is
+// cheap (single Supabase row).
+export const dynamic = "force-dynamic";
+
+// Render the right currency label per visitor. Falls back to INR if a
+// USD label hasn't been set, or if we can't detect the country.
+function priceFor(tier: ServicesTier, isIndia: boolean): string {
+  if (isIndia) return tier.price_label;
+  return tier.price_label_usd?.trim() || tier.price_label;
+}
+
+async function detectIsIndia(): Promise<boolean> {
+  try {
+    const h = await headers();
+    // Vercel sets x-vercel-ip-country (ISO 3166-1 alpha-2). When
+    // running locally the header is missing — default to true so India
+    // pricing shows during dev / unknown-origin requests.
+    const country = (h.get("x-vercel-ip-country") || "").trim().toUpperCase();
+    if (!country) return true;
+    return country === "IN";
+  } catch {
+    return true;
+  }
+}
 
 async function fetchServices(): Promise<ServicesSettings> {
   try {
@@ -50,8 +75,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesPage() {
-  const s = await fetchServices();
+  const [s, isIndia] = await Promise.all([fetchServices(), detectIsIndia()]);
   const [tierEssential, tierDeepDive] = s.tiers;
+  const tierEssentialPrice = priceFor(tierEssential, isIndia);
+  const tierDeepDivePrice = priceFor(tierDeepDive, isIndia);
 
   return (
     <>
@@ -169,7 +196,7 @@ export default async function ServicesPage() {
                 </h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-headline text-4xl sm:text-5xl text-primary">
-                    {tierEssential.price_label}
+                    {tierEssentialPrice}
                   </span>
                   <span className="text-sm text-on-surface-variant">
                     {tierEssential.price_unit}
@@ -227,7 +254,7 @@ export default async function ServicesPage() {
                   </h3>
                   <div className="flex items-baseline gap-2">
                     <span className="font-headline text-4xl sm:text-5xl">
-                      {tierDeepDive.price_label}
+                      {tierDeepDivePrice}
                     </span>
                     <span className="text-sm text-white/75">{tierDeepDive.price_unit}</span>
                   </div>
